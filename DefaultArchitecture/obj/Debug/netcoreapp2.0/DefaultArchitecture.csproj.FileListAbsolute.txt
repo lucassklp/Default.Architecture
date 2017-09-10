@@ -20,3 +20,14 @@ C:\Users\simas\Desktop\DefaultArchitecture\DefaultArchitecture\bin\Debug\netcore
 C:\Users\simas\Desktop\DefaultArchitecture\DefaultArchitecture\bin\Debug\netcoreapp2.0\DefaultArchitecture.pdb
 C:\Users\simas\Desktop\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.csproj.CoreCompileInputs.cache
 C:\Users\simas\Desktop\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.AssemblyInfoInputs.cache
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\bin\Debug\netcoreapp2.0\DefaultArchitecture.deps.json
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\bin\Debug\netcoreapp2.0\DefaultArchitecture.runtimeconfig.json
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\bin\Debug\netcoreapp2.0\DefaultArchitecture.runtimeconfig.dev.json
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\bin\Debug\netcoreapp2.0\DefaultArchitecture.dll
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\bin\Debug\netcoreapp2.0\DefaultArchitecture.pdb
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.csprojResolveAssemblyReference.cache
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.csproj.CoreCompileInputs.cache
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.AssemblyInfoInputs.cache
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.AssemblyInfo.cs
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.dll
+C:\Users\simas\Documents\GitHub\DefaultArchitecture\DefaultArchitecture\obj\Debug\netcoreapp2.0\DefaultArchitecture.pdb

@@ -12876,11 +12876,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\simas\\Desktop\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
+      "projectUniqueName": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
       "projectName": "DefaultArchitecture",
-      "projectPath": "C:\\Users\\simas\\Desktop\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
+      "projectPath": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
       "packagesPath": "C:\\Users\\simas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simas\\Desktop\\DefaultArchitecture\\DefaultArchitecture\\obj\\",
+      "outputPath": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

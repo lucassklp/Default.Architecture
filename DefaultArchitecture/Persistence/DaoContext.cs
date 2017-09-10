@@ -1,26 +1,47 @@
 ﻿using DefaultArchitecture.Persistence.Map;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using DefaultArchitecture.Domain;
+using System.IO;
 
 namespace DefaultArchitecture.Persistence
 {
     public class DaoContext : DbContext
+
     {
+        public DaoContext(DbContextOptions<DaoContext> options)
+            : base(options)
+        {
+
+        }
+
         public DaoContext()
             : base()
         {
 
         }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"Server=localhost;Database=architecture;Uid=root;Pwd=4tl4nt45;"); 
+            // get the configuration from the app settings
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            // define the database to use
+            optionsBuilder.UseMySql(config.GetConnectionString("DefaultConnection"));
         }
-        
+
+
+
         /// <summary>
         /// Manipulate a Table using Entity Framework
         /// </summary>

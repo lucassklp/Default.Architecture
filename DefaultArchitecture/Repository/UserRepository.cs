@@ -1,4 +1,5 @@
 ﻿using DefaultArchitecture.Domain;
+using DefaultArchitecture.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,13 @@ namespace DefaultArchitecture.Repository
         public UserRepository()
         {
             crud = Crud<User>.GetInstance();
+        }
+
+        public User Login(string email, string password)
+        {
+            DaoContext context = new DaoContext();
+            var user = context.Manipulate<User>().Where(x => x.Email == email && x.Password == password).ToList();
+            return (user.Count > 0 ? user[0] : null);
         }
 
         public List<User> SelectAll()

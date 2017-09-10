@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DefaultArchitecture.Repository;
 using DefaultArchitecture.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DefaultArchitecture.Controllers
 {
+    [Authorize("Bearer")]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {

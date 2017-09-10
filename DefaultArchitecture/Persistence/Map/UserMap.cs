@@ -17,6 +17,7 @@ namespace DefaultArchitecture.Persistence.Map
             builder.Property(x => x.ID).HasColumnName("UserID");
             builder.Property(x => x.Name).HasColumnName("Name");
             builder.Property(x => x.Password).HasColumnName("Password");
+            builder.Property(x => x.Email).HasColumnName("Email");
 
             builder.HasKey(x => x.ID);
         }
