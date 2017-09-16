@@ -25,24 +25,16 @@ namespace DefaultArchitecture.Controllers
             this.userRepository = new UserRepository();
         }
 
-
         [HttpPost]
         public string GetAuthToken([FromBody]User user)
         {
-            var existUser = userRepository.Login(user.Email, user.Password); //new User(); //UserStorage.Users.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+            var existUser = userRepository.Login(user.Email, user.Password);
 
             if (existUser != null)
             {
-                var requestAt = DateTime.Now;
-                var expiresIn = requestAt.Add(TimeSpan.FromMinutes(1));
-                var token = GenerateToken(existUser, expiresIn);
-
                 return JsonConvert.SerializeObject(new
                 {
-                    requestAt = requestAt,
-                    expiresIn = TimeSpan.FromMinutes(1).TotalSeconds,
-                    tokeyType = "Bearer",
-                    accessToken = token
+                    Token = GenerateToken(existUser)
                 });
             }
             else
@@ -54,12 +46,12 @@ namespace DefaultArchitecture.Controllers
             }
         }
 
-        private string GenerateToken(User user, DateTime expires)
+        private string GenerateToken(User user)
         {
             var handler = new JwtSecurityTokenHandler();
 
             ClaimsIdentity identity = new ClaimsIdentity(
-                new GenericIdentity(user.Email, "TokenAuth"),
+                new GenericIdentity(user.Email, "Token"),
                 new[] {
                     new Claim("ID", user.ID.ToString())
                 }
@@ -71,14 +63,15 @@ namespace DefaultArchitecture.Controllers
                 Audience = "Audience",
                 SigningCredentials = new SigningCredentials(new RsaSecurityKey(new RSACryptoServiceProvider(2048).ExportParameters(true)), SecurityAlgorithms.RsaSha256Signature),
                 Subject = identity,
-                Expires = expires,
-                NotBefore = DateTime.Now.Subtract(TimeSpan.FromMinutes(30))
+                Expires = DateTime.Now.Add(TimeSpan.FromMinutes(30)),
+                NotBefore = DateTime.Now
             });
+
             return handler.WriteToken(securityToken);
         }
 
         [HttpGet]
-        [Authorize("Bearer")]
+        [AllowAnonymous]
         public string GetUserInfo()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;

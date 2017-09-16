@@ -39,9 +39,7 @@ namespace DefaultArchitecture
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-            
+        {            
             services.AddDbContext<DaoContext>(options => 
             {
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
@@ -77,19 +75,13 @@ namespace DefaultArchitecture
                     IssuerSigningKey = new RsaSecurityKey(new RSACryptoServiceProvider(2048).ExportParameters(true)),
                     ValidAudience = "Audience",
                     ValidIssuer = "Issuer",
-                    // When receiving a token, check that we've signed it.
                     ValidateIssuerSigningKey = true,
-                    // When receiving a token, check that it is still valid.
                     ValidateLifetime = true,
-                    
-                    // This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
-                    // when validating the lifetime. As we're creating the tokens locally and validating them on the same 
-                    // machines which should have synchronised time, this can be set to zero. Where external tokens are
-                    // used, some leeway here could be useful.
                     ClockSkew = TimeSpan.FromMinutes(0)
                 };
             });
-            //GlobalConfiguration.Configuration.SuppressDefaultHostAuthentication();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,7 +98,6 @@ namespace DefaultArchitecture
                 {
                     var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
 
-                    //when authorization has failed, should retrun a json message to client
                     if (error != null && error.Error is SecurityTokenExpiredException)
                     {
                         context.Response.StatusCode = 401;
@@ -118,7 +109,7 @@ namespace DefaultArchitecture
                             Msg = "token expired"
                         }));
                     }
-                    //when orther error, retrun a error message json to client
+
                     else if (error != null && error.Error != null)
                     {
                         context.Response.StatusCode = 500;
@@ -129,7 +120,6 @@ namespace DefaultArchitecture
                             Msg = error.Error.Message
                         }));
                     }
-                    //when no error, do next.
                     else await next();
                 });
             });
