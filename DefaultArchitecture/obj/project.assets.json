@@ -12867,7 +12867,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\simas\\.nuget\\packages\\": {},
+    "C:\\Users\\Lucas\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -12876,17 +12876,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
+      "projectUniqueName": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
       "projectName": "DefaultArchitecture",
-      "projectPath": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
-      "packagesPath": "C:\\Users\\simas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\obj\\",
+      "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
+      "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\simas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
