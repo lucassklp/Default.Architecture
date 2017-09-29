@@ -5,27 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Security.Principal;
-using System.Threading.Tasks;
 
 namespace DefaultArchitecture.Controllers
 {
     [Route("api/[controller]")]
-    public class TokenAuthController : Controller
+    public class LoginController : Controller
     {
 
         private UserRepository userRepository;
-        public TokenAuthController()
+        public LoginController()
         {
             this.userRepository = new UserRepository();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public string GetAuthToken([FromBody]User user)
         {
             var existUser = userRepository.Login(user.Email, user.Password);
@@ -59,11 +56,11 @@ namespace DefaultArchitecture.Controllers
 
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
-                Issuer = "Issuer",
-                Audience = "Audience",
-                SigningCredentials = new SigningCredentials(new RsaSecurityKey(new RSACryptoServiceProvider(2048).ExportParameters(true)), SecurityAlgorithms.RsaSha256Signature),
+                Issuer = Security.Issuer,
+                Audience = Security.Audience,
+                SigningCredentials = Security.SigningCredentials,
                 Subject = identity,
-                Expires = DateTime.Now.Add(TimeSpan.FromMinutes(30)),
+                Expires = DateTime.Now.Add(Security.TokenExpirationTime),
                 NotBefore = DateTime.Now
             });
 
@@ -71,7 +68,6 @@ namespace DefaultArchitecture.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public string GetUserInfo()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;

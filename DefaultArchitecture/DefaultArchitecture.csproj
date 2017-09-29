@@ -5,14 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Security\" />
-    <Folder Include="wwwroot\" />
+    <Compile Remove="Security\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="Security\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="Security\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="Security\**" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0-rtm-10062" />
   </ItemGroup>
 

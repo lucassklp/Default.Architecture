@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DefaultArchitecture.Controllers
 {
-    [Authorize("Bearer")]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {

@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using AspNet.Security.OpenIdConnect.Server;
-using Microsoft.AspNetCore.Identity;
 using DefaultArchitecture.Persistence;
-using DefaultArchitecture.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,10 +11,8 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace DefaultArchitecture
 {
@@ -72,16 +62,22 @@ namespace DefaultArchitecture
             {
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    IssuerSigningKey = new RsaSecurityKey(new RSACryptoServiceProvider(2048).ExportParameters(true)),
-                    ValidAudience = "Audience",
-                    ValidIssuer = "Issuer",
+                    IssuerSigningKey = Security.IssuerSigningKey,
+                    ValidAudience = Security.Audience,
+                    ValidIssuer = Security.Issuer,
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.FromMinutes(0)
                 };
             });
 
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                             .RequireAuthenticatedUser()
+                             .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -127,7 +123,6 @@ namespace DefaultArchitecture
             app.UseCors("policy");
             app.UseAuthentication();
             app.UseMvc();
-
         }
     }
 }
