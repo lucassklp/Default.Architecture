@@ -6,9 +6,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DefaultArchitecture
+namespace DefaultArchitecture.Security.JwtSecurity
 {
-    public class Security
+    public class JwtConstants
     {
         public static SecurityKey IssuerSigningKey
         {

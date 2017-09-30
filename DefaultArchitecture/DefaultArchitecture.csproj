@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Security\**" />
     <Compile Remove="wwwroot\**" />
-    <Content Remove="Security\**" />
     <Content Remove="wwwroot\**" />
-    <EmbeddedResource Remove="Security\**" />
     <EmbeddedResource Remove="wwwroot\**" />
-    <None Remove="Security\**" />
     <None Remove="wwwroot\**" />
   </ItemGroup>
 
@@ -24,6 +20,10 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Security\OAuth\" />
   </ItemGroup>
 
 </Project>
