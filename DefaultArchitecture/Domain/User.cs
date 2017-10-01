@@ -12,5 +12,7 @@ namespace DefaultArchitecture.Domain
         public string Email { get; set; }
         public string Name { get; private set; }
         public string Password { get; set; }
+
+        public virtual IList<Role> Roles { get; set; }
     }
 }

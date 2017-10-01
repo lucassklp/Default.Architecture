@@ -54,6 +54,7 @@ namespace DefaultArchitecture.Security.JwtSecurity
 
         private static string GetCryptoSecurityKey()
         {
+            //TODO: Set this by configuration file
             var securityKey = "Enter your security key here";
             using (var md5 = MD5.Create())
             {

@@ -16,13 +16,10 @@ namespace DefaultArchitecture.Controllers
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
-        public LoginController()
-        {
-        }
 
         [HttpPost]
         [AllowAnonymous]
-        public string GetAuthToken([FromBody]User user)
+        public string Login([FromBody]User user)
         {
             ISecurity<User> security = new JwtSecurity();
             return JsonConvert.SerializeObject(new

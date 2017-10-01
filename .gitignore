@@ -6,3 +6,9 @@ DefaultArchitecture/bin/Debug/netcoreapp2\.0/DefaultArchitecture\.pdb
 DefaultArchitecture/obj/Debug/netcoreapp2\.0/DefaultArchitecture\.pdb
 
 DefaultArchitecture/obj/Debug/netcoreapp2\.0/
+
+\.vs/config/applicationhost\.config
+
+\.vs/DefaultArchitecture/v15/
+
+DefaultArchitecture/bin/Debug/netcoreapp2\.0/

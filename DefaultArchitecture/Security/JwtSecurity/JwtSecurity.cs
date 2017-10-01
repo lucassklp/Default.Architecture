@@ -32,7 +32,7 @@ namespace DefaultArchitecture.Security.JwtSecurity
 
         public string Logout(User identity)
         {
-            //Precisa ser estudado...
+            
             return null;
         }
 
@@ -56,6 +56,7 @@ namespace DefaultArchitecture.Security.JwtSecurity
                 Expires = DateTime.Now.Add(JwtConstants.TokenExpirationTime),
                 NotBefore = DateTime.Now
             });
+            
 
             return handler.WriteToken(securityToken);
         }
