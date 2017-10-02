@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DefaultArchitecture.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using DefaultArchitecture.Security.JwtSecurity;
+using Security.JwtSecurity;
+using Persistence;
 
 namespace DefaultArchitecture
 {
@@ -43,7 +43,7 @@ namespace DefaultArchitecture
             services.ConfigureJwtAuthorization();
             
 
-            //Every pages needs to be authenticated
+            //All pages needs to be authenticated
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()

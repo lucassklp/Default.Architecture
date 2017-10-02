@@ -1,0 +1,9 @@
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\bin\Debug\netcoreapp2.0\Domain.deps.json
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\bin\Debug\netcoreapp2.0\Domain.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\bin\Debug\netcoreapp2.0\Domain.pdb
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.AssemblyInfoInputs.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.AssemblyInfo.cs
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.pdb
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.csprojResolveAssemblyReference.cache

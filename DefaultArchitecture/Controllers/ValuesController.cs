@@ -3,20 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using DefaultArchitecture.Repository;
-using DefaultArchitecture.Domain;
+using Repository;
+using Domain;
 using Microsoft.AspNetCore.Authorization;
+using Persistence;
 
 namespace DefaultArchitecture.Controllers
 {
+
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+
+        private DaoContext context;
+
+        public ValuesController(DaoContext daoContext)
+        {
+            this.context = daoContext;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            UserRepository repository = new UserRepository();
+            UserRepository repository = new UserRepository(context);
             return repository.SelectAll();
         }
 

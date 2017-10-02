@@ -266,7 +266,7 @@
           "lib/netcoreapp2.0/_._": {}
         },
         "build": {
-          "build/netcoreapp2.0/Microsoft.AspNetCore.All.targets": {}
+          "build/netcoreapp2.0/_._": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/2.0.0": {
@@ -1040,7 +1040,7 @@
           "Microsoft.AspNetCore.Mvc.RazorPages": "2.0.0"
         },
         "build": {
-          "build/netstandard2.0/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.targets": {}
+          "build/netstandard2.0/_._": {}
         }
       },
       "Microsoft.AspNetCore.Mvc.RazorPages/2.0.0": {
@@ -1973,7 +1973,7 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
         },
         "build": {
-          "build/netstandard2.0/Microsoft.Extensions.Configuration.UserSecrets.targets": {}
+          "build/netstandard2.0/_._": {}
         }
       },
       "Microsoft.Extensions.Configuration.Xml/2.0.0": {
@@ -2806,7 +2806,7 @@
           }
         }
       },
-      "MySqlConnector/0.26.1": {
+      "MySqlConnector/0.26.4": {
         "type": "package",
         "dependencies": {
           "System.Buffers": "4.3.0",
@@ -2901,13 +2901,13 @@
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
         }
       },
-      "Pomelo.EntityFrameworkCore.MySql/2.0.0-rtm-10062": {
+      "Pomelo.EntityFrameworkCore.MySql/2.0.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": "2.0.0",
           "Microsoft.EntityFrameworkCore.Relational": "2.0.0",
           "Microsoft.Extensions.Logging.Console": "2.0.0",
-          "MySqlConnector": "0.26.1",
+          "MySqlConnector": "0.26.4",
           "Pomelo.JsonObject": "1.1.1"
         },
         "compile": {
@@ -5137,6 +5137,61 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
+        }
+      },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "Persistence/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "2.0.0",
+          "Pomelo.EntityFrameworkCore.MySql": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Persistence.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Persistence.dll": {}
+        }
+      },
+      "Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Persistence": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repository.dll": {}
+        }
+      },
+      "Security/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Microsoft.AspNetCore.All": "2.0.0",
+          "Persistence": "1.0.0",
+          "Repository": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Security.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Security.dll": {}
         }
       }
     }
@@ -7936,16 +7991,16 @@
         "version.txt"
       ]
     },
-    "MySqlConnector/0.26.1": {
-      "sha512": "DEWS+PiC+JeYw5zLEoZeOlWyKOQBoxuWdwkrRnv6V5rY2GNpLWnhlBl/P/EPXkHA7PZSFcgVBvR4wimiAioXrg==",
+    "MySqlConnector/0.26.4": {
+      "sha512": "jJ8whR/B6X1qG5jHXVDR+bTwnNxOAGBmy6qiEv8YA7MeXnTkNBegWDfvCH1/RJJYzGVbNS40VaHQv6Tqbo48gA==",
       "type": "package",
-      "path": "mysqlconnector/0.26.1",
+      "path": "mysqlconnector/0.26.4",
       "files": [
         "lib/net45/MySqlConnector.dll",
         "lib/net46/MySqlConnector.dll",
         "lib/netstandard1.3/MySqlConnector.dll",
         "lib/netstandard2.0/MySqlConnector.dll",
-        "mysqlconnector.0.26.1.nupkg.sha512",
+        "mysqlconnector.0.26.4.nupkg.sha512",
         "mysqlconnector.nuspec"
       ]
     },
@@ -8129,13 +8184,13 @@
         "nuget.frameworks.nuspec"
       ]
     },
-    "Pomelo.EntityFrameworkCore.MySql/2.0.0-rtm-10062": {
-      "sha512": "yT2Xx0eRrlQrr0SqveTwGtynyNAeuJ+vEX13jpDH+XgwlBYAzcqXC6pPWEKCoTBag/5+97VJv/0B+tvwJwmX8A==",
+    "Pomelo.EntityFrameworkCore.MySql/2.0.0": {
+      "sha512": "+13BZXxGQ4E/fRXj8JNo2ifmJkEdM5pSve5HNLdrGe/IQ/6MpGsbcqpAV8eDRE11E3IvDbqnHXfOQcI6rr7LdQ==",
       "type": "package",
-      "path": "pomelo.entityframeworkcore.mysql/2.0.0-rtm-10062",
+      "path": "pomelo.entityframeworkcore.mysql/2.0.0",
       "files": [
         "lib/netstandard2.0/Pomelo.EntityFrameworkCore.MySql.dll",
-        "pomelo.entityframeworkcore.mysql.2.0.0-rtm-10062.nupkg.sha512",
+        "pomelo.entityframeworkcore.mysql.2.0.0.nupkg.sha512",
         "pomelo.entityframeworkcore.mysql.nuspec"
       ]
     },
@@ -13352,19 +13407,41 @@
         "windowsazure.storage.8.1.4.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Domain.csproj",
+      "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Persistence/1.0.0": {
+      "type": "project",
+      "path": "../Persistence/Persistence.csproj",
+      "msbuildProject": "../Persistence/Persistence.csproj"
+    },
+    "Repository/1.0.0": {
+      "type": "project",
+      "path": "../Repository/Repository.csproj",
+      "msbuildProject": "../Repository/Repository.csproj"
+    },
+    "Security/1.0.0": {
+      "type": "project",
+      "path": "../Security/Security.csproj",
+      "msbuildProject": "../Security/Security.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "Microsoft.AspNetCore.All >= 2.0.0",
+      "Domain >= 1.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0",
-      "Pomelo.EntityFrameworkCore.MySql >= 2.0.0-rtm-10062"
+      "Persistence >= 1.0.0",
+      "Repository >= 1.0.0",
+      "Security >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\simas\\.nuget\\packages\\": {},
+    "C:\\Users\\Lucas\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13373,17 +13450,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
+      "projectUniqueName": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
       "projectName": "DefaultArchitecture",
-      "projectPath": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
-      "packagesPath": "C:\\Users\\simas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\obj\\",
+      "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\DefaultArchitecture.csproj",
+      "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\DefaultArchitecture\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\simas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13395,7 +13472,20 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Security\\Security.csproj": {
+              "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Security\\Security.csproj"
+            },
+            "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Domain\\Domain.csproj"
+            },
+            "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Repository\\Repository.csproj"
+            },
+            "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Persistence\\Persistence.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -13407,10 +13497,6 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Pomelo.EntityFrameworkCore.MySql": {
-            "target": "Package",
-            "version": "2.0.0-rtm-10062"
-          },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "2.0.0"
@@ -13421,10 +13507,6 @@
             "autoReferenced": true
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
-          "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.0"
           }

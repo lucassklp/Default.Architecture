@@ -1,0 +1,11 @@
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\bin\Debug\netcoreapp2.0\Persistence.deps.json
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\bin\Debug\netcoreapp2.0\Persistence.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\obj\Debug\netcoreapp2.0\Persistence.csprojResolveAssemblyReference.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\obj\Debug\netcoreapp2.0\Persistence.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\obj\Debug\netcoreapp2.0\Persistence.AssemblyInfoInputs.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\obj\Debug\netcoreapp2.0\Persistence.AssemblyInfo.cs
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\bin\Debug\netcoreapp2.0\Persistence.pdb
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\bin\Debug\netcoreapp2.0\Domain.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\bin\Debug\netcoreapp2.0\Domain.pdb
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\obj\Debug\netcoreapp2.0\Persistence.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Persistence\obj\Debug\netcoreapp2.0\Persistence.pdb

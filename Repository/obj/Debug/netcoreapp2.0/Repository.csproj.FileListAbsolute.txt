@@ -1,0 +1,13 @@
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\bin\Debug\netcoreapp2.0\Repository.deps.json
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\bin\Debug\netcoreapp2.0\Repository.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\bin\Debug\netcoreapp2.0\Repository.pdb
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\bin\Debug\netcoreapp2.0\Domain.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\bin\Debug\netcoreapp2.0\Persistence.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\bin\Debug\netcoreapp2.0\Domain.pdb
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\bin\Debug\netcoreapp2.0\Persistence.pdb
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\obj\Debug\netcoreapp2.0\Repository.csprojResolveAssemblyReference.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\obj\Debug\netcoreapp2.0\Repository.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\obj\Debug\netcoreapp2.0\Repository.AssemblyInfoInputs.cache
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\obj\Debug\netcoreapp2.0\Repository.AssemblyInfo.cs
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\obj\Debug\netcoreapp2.0\Repository.dll
+C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Repository\obj\Debug\netcoreapp2.0\Repository.pdb
