@@ -7,6 +7,6 @@ namespace Domain
         public long ID { get; set; }
         public string Description { get; set; }
 
-        public virtual IList<User> Users { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

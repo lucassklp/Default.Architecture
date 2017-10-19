@@ -7,26 +7,26 @@ using Repository;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Persistence;
+using Repository.Interfaces;
 
 namespace DefaultArchitecture.Controllers
 {
-
+    [Authorize()]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
 
-        private DaoContext context;
+        IUserRepository repository;
 
-        public ValuesController(DaoContext daoContext)
+        public ValuesController(IUserRepository repository)
         {
-            this.context = daoContext;
+            this.repository = repository;
         }
 
         // GET api/values
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            UserRepository repository = new UserRepository(context);
             return repository.SelectAll();
         }
 

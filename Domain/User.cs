@@ -9,6 +9,6 @@ namespace Domain
         public string Name { get; private set; }
         public string Password { get; set; }
 
-        public virtual IList<Role> Roles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

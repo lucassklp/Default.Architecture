@@ -1,20 +1,15 @@
 ﻿using Domain;
-using Repository;
 using Security;
 using Security.JwtSecurity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Principal;
 using Persistence;
 
 namespace DefaultArchitecture.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/login")]
     public class LoginController : Controller
     {
         DaoContext context;

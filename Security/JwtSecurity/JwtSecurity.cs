@@ -43,12 +43,14 @@ namespace Security.JwtSecurity
         {
             var handler = new JwtSecurityTokenHandler();
 
-            ClaimsIdentity identity = new ClaimsIdentity(
-                new GenericIdentity(user.Email, "Token"),
-                new[] {
-                    new Claim("ID", user.ID.ToString())
-                }
-            );
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim("ID", user.ID.ToString()));
+            //foreach(var userRole in user.UserRoles)
+            //{
+            //    claims.Add(new Claim(userRole.Role.Description, user.ID.ToString()));
+            //}
+
+            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(user.Email, "Token"), claims);
 
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {

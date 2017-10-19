@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Security.JwtSecurity;
 using Persistence;
+using Repository;
+using Repository.Interfaces;
 
 namespace DefaultArchitecture
 {
@@ -28,6 +30,9 @@ namespace DefaultArchitecture
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+
+            //Injecting the repositories
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddCors(config =>
             {
