@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Persistence;
 using Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,12 @@ namespace Repository
 
         public User Login(string email, string password)
         {
-            var user = context.Manipulate<User>().Where(x => x.Email == email && x.Password == password).ToList();            
-            if(user.Count > 0)
-            {
-                user[0].UserRoles = context.Manipulate<UserRole>().Where(x => x.UserId == user[0].ID).ToList();
-            }
+            var user = context.Manipulate<User>()
+                .Include(x => x.UserRoles)
+                .Where(x => x.Email == email && x.Password == password)
+                .ToList();
             return (user.Count > 0 ? user[0] : null);
+
         }
 
         public List<User> SelectAll()

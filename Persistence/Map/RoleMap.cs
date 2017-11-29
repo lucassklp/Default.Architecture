@@ -11,9 +11,12 @@ namespace Persistence.Map
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasKey(x => x.ID);
+            builder.ToTable("role");
+            
             builder.Property(x => x.ID).HasColumnName("RoleID");
+            builder.Property(x => x.Description).HasColumnName("Description");
 
+            builder.HasKey(x => x.ID);
         }
     }
 }

@@ -1,23 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Persistence.Map;
 using System;
 
 namespace Persistence
 {
     public class DaoContext : DbContext
-
     {
-        public DaoContext(DbContextOptions<DaoContext> options)
+        private ILoggerFactory _loggerFactory;
+
+        public DaoContext(DbContextOptions<DaoContext> options, ILoggerFactory loggerFactory)
             : base(options)
         {
-
+            this._loggerFactory = loggerFactory;
         }
 
-        //public DaoContext()
-        //    : base()
-        //{
-
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLoggerFactory(_loggerFactory);
+        }
 
 
         /// <summary>

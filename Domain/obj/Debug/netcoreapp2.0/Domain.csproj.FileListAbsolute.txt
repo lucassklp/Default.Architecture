@@ -7,3 +7,12 @@ C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2
 C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.dll
 C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.pdb
 C:\Users\Lucas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.csprojResolveAssemblyReference.cache
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\bin\Debug\netcoreapp2.0\Domain.deps.json
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\bin\Debug\netcoreapp2.0\Domain.dll
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\bin\Debug\netcoreapp2.0\Domain.pdb
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.csprojResolveAssemblyReference.cache
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.AssemblyInfoInputs.cache
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.AssemblyInfo.cs
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.dll
+C:\Users\lucas.simas\Documents\GitHub\DefaultArchitecture\Domain\obj\Debug\netcoreapp2.0\Domain.pdb

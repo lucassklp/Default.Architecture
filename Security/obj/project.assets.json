@@ -12837,7 +12837,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lucas\\.nuget\\packages\\": {},
+    "C:\\Users\\lucas.simas\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -12846,17 +12846,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Security\\Security.csproj",
+      "projectUniqueName": "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Security\\Security.csproj",
       "projectName": "Security",
-      "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Security\\Security.csproj",
-      "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Security\\obj\\",
+      "projectPath": "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Security\\Security.csproj",
+      "packagesPath": "C:\\Users\\lucas.simas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Security\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lucas.simas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12869,14 +12869,14 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Domain\\Domain.csproj"
+            "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Domain\\Domain.csproj"
             },
-            "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Repository\\Repository.csproj": {
-              "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Repository\\Repository.csproj"
+            "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Repository\\Repository.csproj"
             },
-            "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\Users\\Lucas\\Documents\\GitHub\\DefaultArchitecture\\Persistence\\Persistence.csproj"
+            "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Users\\lucas.simas\\Documents\\GitHub\\DefaultArchitecture\\Persistence\\Persistence.csproj"
             }
           }
         }
