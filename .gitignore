@@ -1,17 +1,17 @@
-/DefaultArchitecture/bin
-/DefaultArchitecture/obj
+DefaultArchitecture/bin/
+DefaultArchitecture/obj/
 
-/Domain/bin
-/Domain/obj
+Domain/bin/
+Domain/obj/
 
-/Persistence/bin
-/Persistence/obj
+Persistence/bin/
+Persistence/obj/
 
-/Repository/bin
-/Repository/obj
+Repository/bin/
+Repository/obj/
 
-/Security/bin
-/Security/obj
+Security/bin/
+Security/obj/
 
 
 DefaultArchitecture/bin/Debug/netcoreapp2\.0/DefaultArchitecture\.dll
