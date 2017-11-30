@@ -1,3 +1,18 @@
+DefaultArchitecture/bin/*
+DefaultArchitecture/obj/*
+
+Domain/bin/*
+Domain/obj/*
+
+Persistence/bin/*
+Persistence/obj/*
+
+Repository/bin/*
+Repository/obj/*
+
+Security/bin/*
+Security/obj/*
+
 
 DefaultArchitecture/bin/Debug/netcoreapp2\.0/DefaultArchitecture\.dll
 
@@ -12,3 +27,5 @@ DefaultArchitecture/obj/Debug/netcoreapp2\.0/
 \.vs/DefaultArchitecture/v15/
 
 DefaultArchitecture/bin/Debug/netcoreapp2\.0/
+
+
