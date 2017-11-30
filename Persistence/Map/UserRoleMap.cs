@@ -15,8 +15,6 @@ namespace Persistence.Map
 
             builder.Property(x => x.UserId).HasColumnName("user_UserID");
             builder.Property(x => x.RoleId).HasColumnName("roles_RolesID");
-
-            builder.HasKey(x => new { x.UserId, x.RoleId });
             
             builder.HasOne(x => x.Role)
                 .WithMany(x => x.UserRoles)
@@ -25,6 +23,8 @@ namespace Persistence.Map
             builder.HasOne(x => x.User)
                 .WithMany(x => x.UserRoles)
                 .HasForeignKey(x => x.UserId);
+
+            builder.HasKey(x => new { x.UserId, x.RoleId });
         }
     }
 }
