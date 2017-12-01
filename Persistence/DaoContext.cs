@@ -13,12 +13,15 @@ namespace Persistence
             : base(options)
         {
             this._loggerFactory = loggerFactory;
+            var a = this._loggerFactory.CreateLogger("Teste");
+            a.LogDebug("Log feito com sucesso");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseLoggerFactory(_loggerFactory);
+
         }
 
 
