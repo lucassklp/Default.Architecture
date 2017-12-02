@@ -36,6 +36,8 @@ namespace DefaultArchitecture
                     .AddDebug();
             });
 
+            TelemetryConfiguration.Active.DisableTelemetry = true;
+
             //Configure the ConnectionString
             services.AddDbContext<DaoContext>(options => 
             {

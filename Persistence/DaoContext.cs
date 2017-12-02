@@ -14,7 +14,7 @@ namespace Persistence
         {
             this._loggerFactory = loggerFactory;
             var a = this._loggerFactory.CreateLogger("Teste");
-            a.LogDebug("Log feito com sucesso");
+            a.LogInformation("Log feito com sucesso");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
