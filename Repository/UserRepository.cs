@@ -22,12 +22,14 @@ namespace Repository
 
         public User Login(string email, string password)
         {
-            var user = context.Manipulate<User>()
-                .Include(x => x.UserRoles)
-                .Where(x => x.Email == email && x.Password == password)
-                .ToList();
-            return (user.Count > 0 ? user[0] : null);
 
+            var user = context.Manipulate<User>()
+                .Include(u => u.UserRoles)
+                    .ThenInclude(userRoles => userRoles.Role)
+                .Single(x => x.Email == email && x.Password == password);
+
+
+            return user;
         }
 
         public List<User> SelectAll()
