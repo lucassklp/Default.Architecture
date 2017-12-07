@@ -11,7 +11,7 @@ using Repository.Interfaces;
 
 namespace DefaultArchitecture.Controllers
 {
-    [Authorize(Roles = "Administrador1")]
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
