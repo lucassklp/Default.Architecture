@@ -1,6 +1,6 @@
 ﻿using Domain;
 using Security;
-using Security.JwtSecurity;
+using DefaultArchitecture.Security.JwtSecurity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

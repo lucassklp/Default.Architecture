@@ -44,9 +44,8 @@ namespace Repository
 
         public T Update(T item)
         {
-            //TODO: Fazer funcionar
-            //context.Manipulate<T>().AddOrUpdate<T>(item);
-            //context.SaveChanges();
+            context.Manipulate<T>().Update(item);
+            context.SaveChanges();
             return item;
         }
     }

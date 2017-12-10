@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{144BEBE6-F947-48D6-889C-47F0CF392D05}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Security.csproj", "{96EE0C71-B827-4AB8-A4A7-14E7EF4FBC18}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{AE6B4FAB-3BBE-4F37-8734-0B525AEF34CD}"
 EndProject
 Global
@@ -37,10 +35,6 @@ Global
 		{144BEBE6-F947-48D6-889C-47F0CF392D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{144BEBE6-F947-48D6-889C-47F0CF392D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{144BEBE6-F947-48D6-889C-47F0CF392D05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96EE0C71-B827-4AB8-A4A7-14E7EF4FBC18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96EE0C71-B827-4AB8-A4A7-14E7EF4FBC18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96EE0C71-B827-4AB8-A4A7-14E7EF4FBC18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96EE0C71-B827-4AB8-A4A7-14E7EF4FBC18}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE6B4FAB-3BBE-4F37-8734-0B525AEF34CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE6B4FAB-3BBE-4F37-8734-0B525AEF34CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE6B4FAB-3BBE-4F37-8734-0B525AEF34CD}.Release|Any CPU.ActiveCfg = Release|Any CPU

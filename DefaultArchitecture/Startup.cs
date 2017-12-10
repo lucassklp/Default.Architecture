@@ -6,15 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Security.JwtSecurity;
 using Persistence;
-using Repository;
-using Repository.Interfaces;
 using Microsoft.Extensions.Logging;
-using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
+using DefaultArchitecture.Security.JwtSecurity;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace DefaultArchitecture
 {
@@ -61,6 +58,8 @@ namespace DefaultArchitecture
                 config.AddPolicy("policy", policy);
             });
 
+            //Load the Jwt Configuration from the appsettings.json (See 'JwtConfiguration' in appsettings.json)
+            JwtTokenDefinitions.LoadFromConfiguration(Configuration);
             //Configuring Authentication
             services.ConfigureJwtAuthentication();
             //Configuring Authorization
