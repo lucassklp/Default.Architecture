@@ -47,8 +47,8 @@ namespace DefaultArchitecture
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            //Injecting the repositories
-            services.AddTransient<IUserRepository, UserRepository>();
+            //Injecting the services (See: Injector.cs)
+            services.InjectServices();
 
             //Configuring CORS
             services.AddCors(config =>

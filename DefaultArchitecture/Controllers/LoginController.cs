@@ -20,25 +20,26 @@ namespace DefaultArchitecture.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public string Login([FromBody]User user)
+        public IActionResult Login([FromBody]User user)
         {
             ISecurity<User> security = new JwtSecurity(context);
-            return JsonConvert.SerializeObject(new
+            return Ok(JsonConvert.SerializeObject(new
             {
                 token = security.Login(user)
-            });
+            }));
         }
 
         
         [HttpGet]
-        public string GetUserInfo()
+        public IActionResult GetUserInfo()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
 
-            return JsonConvert.SerializeObject(new 
+            return Ok(JsonConvert.SerializeObject(new 
             {
-                UserName = claimsIdentity.Name
-            });
+                UserName = claimsIdentity.Name,
+                Claims = claimsIdentity.Claims
+            }));
         }
     }
 }

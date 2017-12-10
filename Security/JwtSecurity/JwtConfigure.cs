@@ -21,8 +21,10 @@ namespace Security.JwtSecurity
             });
         }
 
-        public static void ConfigureJwtAuthentication(this IServiceCollection services)
+        public static void ConfigureJwtAuthentication(this IServiceCollection services, string key)
         {
+            JwtTokenConstants.Key = key;
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;

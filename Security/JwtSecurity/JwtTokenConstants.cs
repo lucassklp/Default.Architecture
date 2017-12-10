@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Extensions;
 
 namespace Security.JwtSecurity
 {
@@ -14,7 +15,7 @@ namespace Security.JwtSecurity
         {
             get
             {
-                return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(GetCryptoSecurityKey()));
+                return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));
             }
         }
 
@@ -50,17 +51,12 @@ namespace Security.JwtSecurity
             }
         }
 
+        private static string _key;
 
-
-        private static string GetCryptoSecurityKey()
+        public static String Key
         {
-            //TODO: Set this by configuration file
-            var securityKey = "Enter your security key here";
-            using (var md5 = MD5.Create())
-            {
-                var result = md5.ComputeHash(Encoding.ASCII.GetBytes(securityKey));
-                return Encoding.ASCII.GetString(result);
-            }
+            get => _key;
+            set => _key = value.ToMD5();
         }
     }
 }

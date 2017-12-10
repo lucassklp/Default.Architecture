@@ -13,6 +13,8 @@ Repository/obj/
 Security/bin/
 Security/obj/
 
+*/bin/
+*/obj/
 
 DefaultArchitecture/bin/Debug/netcoreapp2\.0/DefaultArchitecture\.dll
 
