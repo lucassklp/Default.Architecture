@@ -38,7 +38,7 @@ namespace DefaultArchitecture
             //Disabling Telemery
             TelemetryConfiguration.Active.DisableTelemetry = true;
 
-            //Configure the ConnectionString
+            //Configure the ConnectionString (Set the 'ConnectionString' section in appsettings.json)
             services.AddDbContext<DaoContext>(options => 
             {
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
@@ -58,14 +58,14 @@ namespace DefaultArchitecture
                 config.AddPolicy("policy", policy);
             });
 
-            //Load the Jwt Configuration from the appsettings.json (See 'JwtConfiguration' in appsettings.json)
+            //Load the Jwt Configuration from the appsettings.json (See 'JwtConfiguration' section in appsettings.json)
             JwtTokenDefinitions.LoadFromConfiguration(Configuration);
             //Configuring Authentication
             services.ConfigureJwtAuthentication();
             //Configuring Authorization
             services.ConfigureJwtAuthorization();
 
-            //All pages needs to be authenticated
+            //All pages needs to be authenticated by default
             var mvc = services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
