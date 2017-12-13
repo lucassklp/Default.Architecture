@@ -20,6 +20,8 @@ namespace DefaultArchitecture
         {
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
+
         }
     }
 }

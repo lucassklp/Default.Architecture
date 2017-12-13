@@ -26,7 +26,7 @@ namespace DefaultArchitecture.Senders.Email
         }
 
 
-        public async Task Send()
+        public async virtual Task Send()
         {
             var smtpClient = new SmtpClient("my.smtp.exampleserver.net");
             smtpClient.Credentials = new NetworkCredential("username", "password");

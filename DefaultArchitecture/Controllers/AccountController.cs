@@ -1,6 +1,8 @@
-﻿using DefaultArchitecture.Services.Exceptions;
+﻿using DefaultArchitecture.Senders.Email;
+using DefaultArchitecture.Services.Exceptions;
 using DefaultArchitecture.Services.Interfaces;
 using DefaultArchitecture.Validators;
+using DefaultArchitecture.Views;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,12 +22,22 @@ namespace DefaultArchitecture.Controllers
     {
         private IUserServices userServices;
         private ILogger logger;
-
-        public AccountController(IUserServices userServices, ILogger<AccountController> logger)
+        private IViewRenderService renderService;
+        public AccountController(IUserServices userServices, ILogger<AccountController> logger, IViewRenderService renderService)
         {
             this.userServices = userServices;
             this.logger = logger;
+            this.renderService = renderService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Test()
+        {
+            var a = new AccountCreatedSuccessfullyModel("", "");
+            var result = await renderService.RenderToStringAsync("AccountCreatedSuccessfully", a);
+            return Ok(result);
+        }
+
 
         [HttpPost]
         public IActionResult Register([FromBody] User user)
@@ -39,7 +51,8 @@ namespace DefaultArchitecture.Controllers
             {
                 try
                 {
-                    return Ok(this.userServices.Register(user));
+                    var userRegistred = this.userServices.Register(user);
+                    return Ok(userRegistred);
                 }
                 catch(UserExistentException ex)
                 {
