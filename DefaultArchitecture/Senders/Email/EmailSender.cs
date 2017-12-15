@@ -29,6 +29,7 @@ namespace DefaultArchitecture.Senders.Email
         {
             var smtpClient = new SmtpClient(EmailConfiguration.SMTP.Server);
             smtpClient.Credentials = new NetworkCredential(EmailConfiguration.Sender, EmailConfiguration.Password);
+            smtpClient.EnableSsl = EmailConfiguration.SMTP.EnableSsl;
 
             var from = new MailAddress(EmailConfiguration.Sender, EmailConfiguration.Name);
             var to = new MailAddress(this.To);
@@ -48,7 +49,15 @@ namespace DefaultArchitecture.Senders.Email
             mail.BodyEncoding = Encoding.UTF8;
             mail.IsBodyHtml = this.IsBodyHtml;
 
-            smtpClient.Send(mail);
+            try
+            {
+                smtpClient.Send(mail);
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+
         }
     }
 }

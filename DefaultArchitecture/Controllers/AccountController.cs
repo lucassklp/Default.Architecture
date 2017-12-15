@@ -1,4 +1,5 @@
 ﻿using DefaultArchitecture.Senders.Email;
+using DefaultArchitecture.Services;
 using DefaultArchitecture.Services.Exceptions;
 using DefaultArchitecture.Services.Interfaces;
 using DefaultArchitecture.Validators;
@@ -7,6 +8,7 @@ using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,21 +25,15 @@ namespace DefaultArchitecture.Controllers
         private IUserServices userServices;
         private ILogger logger;
         private IViewRenderService renderService;
-        public AccountController(IUserServices userServices, ILogger<AccountController> logger, IViewRenderService renderService)
+        private IConfiguration configuration;
+
+        public AccountController(IUserServices userServices, ILogger<AccountController> logger, IViewRenderService renderService, IConfiguration configuration)
         {
             this.userServices = userServices;
             this.logger = logger;
             this.renderService = renderService;
+            this.configuration = configuration;
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Test()
-        {
-            var a = new AccountCreatedSuccessfullyModel("", "");
-            var result = await renderService.RenderToStringAsync("AccountCreatedSuccessfully", a);
-            return Ok(result);
-        }
-
 
         [HttpPost]
         public IActionResult Register([FromBody] User user)
@@ -51,7 +47,17 @@ namespace DefaultArchitecture.Controllers
             {
                 try
                 {
+                    var emailConfig = EmailConfiguration.GetFromConfiguration(configuration, "No Reply");
+                    var pageModel = new AccountCreatedSuccessfullyModel();
+                    pageModel.Name = user.Name;
+                    pageModel.Email = user.Email;
+                    
+                    var emailSender = new TemplateEmailSender<AccountCreatedSuccessfullyModel>(emailConfig, pageModel, "AccountCreatedSuccessfully", renderService);
+                    emailSender.To = user.Email;
+                    emailSender.Send();
+
                     var userRegistred = this.userServices.Register(user);
+
                     return Ok(userRegistred);
                 }
                 catch(UserExistentException ex)
@@ -63,6 +69,7 @@ namespace DefaultArchitecture.Controllers
                     logger.LogError(ex, ex.Message);
                     return StatusCode(StatusCodes.Status500InternalServerError);
                 }
+                
             }
             else return BadRequest(results.Errors);
         }

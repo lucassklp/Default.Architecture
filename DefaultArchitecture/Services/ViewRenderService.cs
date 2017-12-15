@@ -13,7 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DefaultArchitecture
+namespace DefaultArchitecture.Services
 {
     public interface IViewRenderService
     {

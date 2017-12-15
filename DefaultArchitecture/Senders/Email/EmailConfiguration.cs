@@ -16,7 +16,7 @@ namespace DefaultArchitecture.Senders.Email
 
         public static EmailConfiguration GetFromConfiguration(IConfiguration configuration, string name)
         {
-            return configuration.GetSection("Email").Get<List<EmailConfiguration>>().Find(x => x.Name == name);
+            return configuration.GetSection("Emails").Get<List<EmailConfiguration>>().Find(x => x.Name == name);
         }
 
     }

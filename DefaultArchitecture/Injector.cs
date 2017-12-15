@@ -3,10 +3,6 @@ using DefaultArchitecture.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DefaultArchitecture
 {
@@ -21,7 +17,6 @@ namespace DefaultArchitecture
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
-
         }
     }
 }
