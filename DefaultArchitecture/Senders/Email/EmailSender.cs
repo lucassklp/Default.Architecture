@@ -15,7 +15,7 @@ namespace DefaultArchitecture.Senders.Email
         public List<string> Bcc { get; set; }
         public List<string> CC { get; set; }
         public string Body { get; set; }
-        public bool IsBodyHtml { get; set; } = true;
+        public bool IsBodyHtml { get; set; }
         public string Subject { get; set; }
 
         public EmailSender(EmailConfiguration emailConfiguration)
@@ -25,35 +25,27 @@ namespace DefaultArchitecture.Senders.Email
             this.CC = new List<string>();
         }
 
-
         public async virtual Task Send()
         {
-            var smtpClient = new SmtpClient("my.smtp.exampleserver.net");
-            smtpClient.Credentials = new NetworkCredential("username", "password");
+            var smtpClient = new SmtpClient(EmailConfiguration.SMTP.Server);
+            smtpClient.Credentials = new NetworkCredential(EmailConfiguration.Sender, EmailConfiguration.Password);
 
-            var from = new MailAddress("test@example.com", "TestFromName");
+            var from = new MailAddress(EmailConfiguration.Sender, EmailConfiguration.Name);
             var to = new MailAddress(this.To);
             var mail = new MailMessage(from, to);
 
             foreach(var bcc in this.Bcc)
-            {
                 mail.Bcc.Add(bcc);
-            }
 
             foreach(var cc in this.CC)
-            {
                 mail.CC.Add(cc);
-            }
 
 
-            // set subject and encoding
             mail.Subject = this.Subject;
             mail.SubjectEncoding = Encoding.UTF8;
 
-            // set body-message and encoding
             mail.Body = this.Body;
             mail.BodyEncoding = Encoding.UTF8;
-            // text or html
             mail.IsBodyHtml = this.IsBodyHtml;
 
             smtpClient.Send(mail);

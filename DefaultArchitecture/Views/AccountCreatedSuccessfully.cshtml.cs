@@ -9,13 +9,9 @@ namespace DefaultArchitecture.Views
 {
     public class AccountCreatedSuccessfullyModel : PageModel
     {
-        public string Name { get; private set; } = "Teste";
-        public string Email { get; private set; } = "Oi";
-
-        public AccountCreatedSuccessfullyModel(string name, string email) : base()
-        {
-
-        }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        
 
         public void OnGet()
         {

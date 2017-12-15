@@ -13,25 +13,21 @@ namespace DefaultArchitecture.Senders.Email
     public class TemplateEmailSender : EmailSender
     {
         private PageModel pageModel;
-        IViewRenderService renderService;
-        public TemplateEmailSender(EmailConfiguration emailConfiguration, PageModel pageModel, IViewRenderService renderService) : base(emailConfiguration)
+        private IViewRenderService renderService;
+        private string viewName;
+
+        public TemplateEmailSender(EmailConfiguration emailConfiguration, PageModel pageModel, string viewName, IViewRenderService renderService) : base(emailConfiguration)
         {
             this.pageModel = pageModel;
             this.renderService = renderService;
-        }
-
-
-        private void a()
-        {
-            
+            this.viewName = viewName;
         }
 
         public async override Task Send()
         {
             base.IsBodyHtml = true;
-            base.Body = await renderService.RenderToStringAsync("AccountCreatedSuccessfully", pageModel);
-            int a = 1 + 1;
-            //await base.Send();
+            base.Body = await renderService.RenderToStringAsync(viewName, pageModel);
+            await base.Send();
         }
 
     }
