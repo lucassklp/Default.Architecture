@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DefaultArchitecture.Senders
+namespace DefaultArchitecture.Services.Exceptions
 {
-    interface ISender
+    public enum SystemErrorCode
     {
-        void Send();
+        UserAlreadyExists
     }
 }

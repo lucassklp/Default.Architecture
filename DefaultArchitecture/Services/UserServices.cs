@@ -3,6 +3,7 @@ using DefaultArchitecture.Services.Interfaces;
 using Domain;
 using Repository.Interfaces;
 using Extensions;
+using MySql.Data.MySqlClient;
 
 namespace DefaultArchitecture.Services
 {
@@ -16,16 +17,19 @@ namespace DefaultArchitecture.Services
 
         public User Register(User user)
         {
-            if (!userRepository.Exists(user))
+            try
             {
-                //Criptography the password
                 user.Password = user.Password.ToSHA512();
                 return userRepository.Register(user);
             }
-            else
+            catch(MySqlException ex)
             {
-                throw new UserExistentException(user);
+                if(ex.Number == (int)MySqlErrors.DuplicatedKey)
+                {
+                    throw new UserExistentException(user);
+                }
             }
+            return user;
         }
 
     }

@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace DefaultArchitecture.Services.Exceptions
 {
-    public class Error<T> where T : Exception
+    public class Error
     {
-        public String Title { get; set; }
         public String Message { get; set; }
+        public int ErrorCode { get; set; }
 
-        public Error(T exception)
+        public Error(DefaultException exception)
         {
-            this.Title = typeof(T).Name;
             this.Message = exception.Message;
+            this.ErrorCode = (int)exception.ErrorCode;
         }
     }
 }

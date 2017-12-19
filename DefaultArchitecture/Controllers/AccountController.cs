@@ -36,7 +36,7 @@ namespace DefaultArchitecture.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] User user)
         {
             //Validate the user
             var validation = new RegisterUserValidation();
@@ -47,29 +47,29 @@ namespace DefaultArchitecture.Controllers
             {
                 try
                 {
+                    var userRegistred = this.userServices.Register(user);
+
                     var emailConfig = EmailConfiguration.GetFromConfiguration(configuration, "No Reply");
                     var pageModel = new AccountCreatedSuccessfullyModel();
                     pageModel.Name = user.Name;
                     pageModel.Email = user.Email;
-                    
+
                     var emailSender = new TemplateEmailSender<AccountCreatedSuccessfullyModel>(emailConfig, pageModel, "AccountCreatedSuccessfully", renderService);
                     emailSender.To = user.Email;
+                    emailSender.OnError = ex => this.logger.LogError($"O Email não pode ser enviado. Mensagem: {ex.Message}");
+
                     emailSender.Send();
-
-                    var userRegistred = this.userServices.Register(user);
-
                     return Ok(userRegistred);
                 }
                 catch(UserExistentException ex)
                 {
-                    return BadRequest(new Error<UserExistentException>(ex));
+                    return BadRequest(new Error(ex));
                 }
                 catch(Exception ex)
                 {
                     logger.LogError(ex, ex.Message);
                     return StatusCode(StatusCodes.Status500InternalServerError);
                 }
-                
             }
             else return BadRequest(results.Errors);
         }

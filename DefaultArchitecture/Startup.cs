@@ -27,14 +27,6 @@ namespace DefaultArchitecture
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Configure logger
-            services.AddLogging(builder =>
-            {
-                builder.AddConfiguration(Configuration.GetSection("Logging"))
-                    .AddConsole()
-                    .AddDebug();
-            });
-
             //Disabling Telemery
             TelemetryConfiguration.Active.DisableTelemetry = true;
 
@@ -98,8 +90,6 @@ namespace DefaultArchitecture
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //Configure logger for show debug info.
-            loggerFactory.AddConsole(LogLevel.Debug);
 
             if (env.IsDevelopment())
             {
