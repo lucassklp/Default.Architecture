@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace DefaultArchitecture.Senders
 {
-    public interface ISender
+    public interface ISenderAsynchronous
     {
-        void Send();
+        void SendAsynchronous();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DefaultArchitecture.Senders.Email;
+using DefaultArchitecture.Senders.Email.Interfaces;
 using DefaultArchitecture.Services;
 using DefaultArchitecture.Services.Exceptions;
 using DefaultArchitecture.Services.Interfaces;
@@ -27,7 +28,10 @@ namespace DefaultArchitecture.Controllers
         private IViewRenderService renderService;
         private IConfiguration configuration;
 
-        public AccountController(IUserServices userServices, ILogger<AccountController> logger, IViewRenderService renderService, IConfiguration configuration)
+        public AccountController(IUserServices userServices, 
+            ILogger<AccountController> logger, 
+            IViewRenderService renderService, 
+            IConfiguration configuration)
         {
             this.userServices = userServices;
             this.logger = logger;
@@ -49,16 +53,19 @@ namespace DefaultArchitecture.Controllers
                 {
                     var userRegistred = this.userServices.Register(user);
 
-                    var emailConfig = EmailConfiguration.GetFromConfiguration(configuration, "No Reply");
                     var pageModel = new AccountCreatedSuccessfullyModel();
                     pageModel.Name = user.Name;
                     pageModel.Email = user.Email;
 
-                    var emailSender = new TemplateEmailSender<AccountCreatedSuccessfullyModel>(emailConfig, pageModel, "AccountCreatedSuccessfully", renderService);
+                    var emailConfig = EmailConfiguration.GetFromConfiguration(configuration, "No Reply");
+                    EmailSender emailSender = new EmailSender(emailConfig);
                     emailSender.To = user.Email;
-                    emailSender.OnError = ex => this.logger.LogError($"O Email não pode ser enviado. Mensagem: {ex.Message}");
 
-                    emailSender.Send();
+                    var accountCreatedEmailSender = new TemplateEmailSender<AccountCreatedSuccessfullyModel>(this.renderService);
+                    accountCreatedEmailSender.EmailSender = emailSender;
+                    accountCreatedEmailSender.PageModel = pageModel;
+                    accountCreatedEmailSender.SendAsynchronous();
+
                     return Ok(userRegistred);
                 }
                 catch(UserExistentException ex)

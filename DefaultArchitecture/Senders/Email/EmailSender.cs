@@ -1,17 +1,16 @@
-﻿using System;
+﻿using DefaultArchitecture.Senders.Email.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DefaultArchitecture.Senders.Email
 {
-    public abstract class EmailSender : ISender
+    public class EmailSender : IEmailSender
     {
-        public EmailConfiguration EmailConfiguration { get; private set; }
+        public EmailConfiguration EmailConfiguration { get; set; }
         public string To { get; set; }
         public List<string> Bcc { get; set; }
         public List<string> CC { get; set; }
@@ -19,6 +18,12 @@ namespace DefaultArchitecture.Senders.Email
         public bool IsBodyHtml { get; set; }
         public string Subject { get; set; }
         public Action<Exception> OnError { get; set; }
+
+        public EmailSender()
+        {
+            this.Bcc = new List<string>();
+            this.CC = new List<string>();
+        }
 
         public EmailSender(EmailConfiguration emailConfiguration)
         {
@@ -60,14 +65,9 @@ namespace DefaultArchitecture.Senders.Email
             }
         }
 
-        public void SendThread()
+        public void SendAsynchronous()
         {
-            Thread thread = new Thread(delegate ()
-            {
-                this.Send();
-            });
-
-            thread.Start();
+            new Thread(this.Send).Start();
         }
     }
 }

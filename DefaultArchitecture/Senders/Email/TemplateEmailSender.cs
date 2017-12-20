@@ -1,4 +1,5 @@
-﻿using DefaultArchitecture.Services;
+﻿using DefaultArchitecture.Senders.Email.Interfaces;
+using DefaultArchitecture.Services;
 using DefaultArchitecture.Views;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
@@ -12,27 +13,30 @@ using System.Threading.Tasks;
 
 namespace DefaultArchitecture.Senders.Email
 {
-    public class TemplateEmailSender<T> : EmailSender where T : PageModel
+    public class TemplateEmailSender<T> : ITemplateEmailSender<T>
+        where T : PageModel
     {
-        private T pageModel;
         private IViewRenderService renderService;
-        private string viewName;
+
+        public IEmailSender EmailSender { get; set; }
+        public T PageModel { get; set; }
         
-        public TemplateEmailSender(EmailConfiguration emailConfiguration, T pageModel, string viewName, IViewRenderService renderService) : base(emailConfiguration)
+        public TemplateEmailSender(IViewRenderService renderService)
         {
-            this.pageModel = pageModel;
             this.renderService = renderService;
-            this.viewName = viewName;
         }
 
         public void Send()
         {
-            new Thread(delegate ()
-            {
-                base.IsBodyHtml = true;
-                base.Body = renderService.RenderToString(viewName, pageModel);
-                base.Send();
-            }).Start();
+            EmailSender.IsBodyHtml = true;
+            var templateName = typeof(T).Name;
+            EmailSender.Body = renderService.RenderToString(templateName.Substring(templateName.Length - 5), PageModel);
+            EmailSender.Send();
+        }
+
+        public void SendAsynchronous()
+        {
+            new Thread(this.Send).Start();
         }
     }
 }
