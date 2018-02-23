@@ -51,6 +51,7 @@ namespace DefaultArchitecture.Controllers
             {
                 try
                 {
+
                     var userRegistred = this.userServices.Register(user);
 
                     var pageModel = new AccountCreatedSuccessfullyModel();
