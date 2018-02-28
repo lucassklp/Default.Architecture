@@ -13,30 +13,31 @@ using System.Threading.Tasks;
 
 namespace DefaultArchitecture.Senders.Email
 {
-    public class TemplateEmailSender<T> : ITemplateEmailSender<T>
-        where T : PageModel
+    public class TemplateEmailSender : ITemplateEmailSender
     {
         private IViewRenderService renderService;
 
         public IEmailSender EmailSender { get; set; }
-        public T PageModel { get; set; }
         
         public TemplateEmailSender(IViewRenderService renderService)
         {
             this.renderService = renderService;
         }
 
-        public void Send()
+        public void Send<T>(T model) where T : PageModel
         {
             EmailSender.IsBodyHtml = true;
             var templateName = typeof(T).Name;
-            EmailSender.Body = renderService.RenderToString(templateName.Substring(templateName.Length - 5), PageModel);
+            EmailSender.Body = renderService.RenderToString(templateName.Substring(templateName.Length - 5), model);
             EmailSender.Send();
         }
 
-        public void SendAsynchronous()
+        public void SendAsync<T>(T model) where T : PageModel
         {
-            new Thread(this.Send).Start();
+            ThreadStart ts = delegate () { Send(model); };
+            Thread th = new Thread(ts);
+            th.IsBackground = true;
+            th.Start();
         }
     }
 }

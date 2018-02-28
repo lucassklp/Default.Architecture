@@ -1,7 +1,8 @@
-﻿using DefaultArchitecture.Senders.Email;
+﻿using Business;
+using Business.Interfaces;
+using DefaultArchitecture.Senders.Email;
 using DefaultArchitecture.Senders.Email.Interfaces;
 using DefaultArchitecture.Services;
-using DefaultArchitecture.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Repository.Interfaces;
@@ -18,11 +19,11 @@ namespace DefaultArchitecture
         {
             //Injecting the service for TemplateEmailSender
             services.AddScoped<IViewRenderService, ViewRenderService>();
+            services.AddScoped<ITemplateEmailSender, TemplateEmailSender>();
 
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IUserRepository, UserRepository>();
-
-
+            services.AddTransient<IUserRepositoryAsync, UserRepository>();
         }
     }
 }

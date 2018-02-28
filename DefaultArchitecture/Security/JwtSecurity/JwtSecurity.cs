@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Persistence;
 using Security;
+using Domain.Entities;
 
 namespace DefaultArchitecture.Security.JwtSecurity
 {

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
-using Domain;
 using Microsoft.AspNetCore.Authorization;
-using Persistence;
 using Repository.Interfaces;
+using Domain.Entities;
 
 namespace DefaultArchitecture.Controllers
 {
