@@ -3,12 +3,12 @@ using Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class Crud<T>
-        where T : class, Identifiable
+    public class Crud<TPrimaryKey, TEntity>
+        where TPrimaryKey: IComparable, IConvertible, IComparable<TPrimaryKey>, IEquatable<TPrimaryKey>
+        where TEntity : class, Identifiable<TPrimaryKey>
     {
         private DaoContext context;
 
@@ -17,34 +17,34 @@ namespace Repository
             context = daoContext;
         }
 
-        public void Create(T item)
+        public void Create(TEntity item)
         {
-            context.Manipulate<T>().Add(item);
+            context.Manipulate<TEntity>().Add(item);
             context.SaveChanges();
         }
 
-        public T Delete(long id)
+        public TEntity Delete(TPrimaryKey id)
         {
-            var selectedItem = context.Manipulate<T>().Where(x => x.ID == id).FirstOrDefault();
-            context.Manipulate<T>().Remove(selectedItem);
+            var selectedItem = context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault();
+            context.Manipulate<TEntity>().Remove(selectedItem);
             context.SaveChanges();
             return selectedItem;
         }
 
-        public T Read(long id)
+        public TEntity Read(TPrimaryKey id)
         {
-            var selectedItem = context.Manipulate<T>().Where(x => x.ID == id).FirstOrDefault();
+            var selectedItem = context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault();
             return selectedItem;
         }
 
-        public List<T> SelectAll()
+        public List<TEntity> SelectAll()
         {
-            return context.Manipulate<T>().ToList();
+            return context.Manipulate<TEntity>().ToList();
         }
 
-        public T Update(T item)
+        public TEntity Update(TEntity item)
         {
-            context.Manipulate<T>().Update(item);
+            context.Manipulate<TEntity>().Update(item);
             context.SaveChanges();
             return item;
         }

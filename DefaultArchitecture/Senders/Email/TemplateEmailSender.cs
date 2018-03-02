@@ -28,7 +28,8 @@ namespace DefaultArchitecture.Senders.Email
         {
             EmailSender.IsBodyHtml = true;
             var templateName = typeof(T).Name;
-            EmailSender.Body = renderService.RenderToString(templateName.Substring(templateName.Length - 5), model);
+            templateName = templateName.Remove(templateName.Length - 5);
+            EmailSender.Body = renderService.RenderToString(templateName, model);
             EmailSender.Send();
         }
 

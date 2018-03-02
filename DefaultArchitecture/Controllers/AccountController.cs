@@ -1,7 +1,7 @@
 ﻿using Business.Exceptions;
 using Business.Interfaces;
 using DefaultArchitecture.Senders.Email;
-using DefaultArchitecture.Services;
+using DefaultArchitecture.Senders.Email.Interfaces;
 using DefaultArchitecture.Validators;
 using DefaultArchitecture.Views;
 using Domain.Entities;
@@ -22,12 +22,12 @@ namespace DefaultArchitecture.Controllers
     {
         private IUserServices userServices;
         private ILogger logger;
-        private TemplateEmailSender templateEmailSender;
+        private ITemplateEmailSender templateEmailSender;
         private IConfiguration configuration;
 
         public AccountController(IUserServices userServices, 
             ILogger<AccountController> logger,
-            TemplateEmailSender templateEmailSender,
+            ITemplateEmailSender templateEmailSender,
             IConfiguration configuration)
         {
             this.userServices = userServices;
@@ -37,7 +37,7 @@ namespace DefaultArchitecture.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public IActionResult Register([FromBody] User user)
         {
             //Validate the user
             var validation = new RegisterUserValidation();

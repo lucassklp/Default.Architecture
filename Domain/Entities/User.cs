@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class User : Identifiable
+    public class User : Identifiable<long>
     {
         public long ID { get; set; }
         public string Email { get; set; }

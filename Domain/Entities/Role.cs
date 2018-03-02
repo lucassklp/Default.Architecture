@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Role : Identifiable
+    public class Role : Identifiable<long>
     {
         public long ID { get; set; }
         public string Description { get; set; }
