@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Extensions
 {
-    public static class Cryptography
+    public static class Hashing
     {
 
         public static string ToSHA256(this string input)
@@ -39,8 +35,7 @@ namespace Extensions
                 return GetStringFromHash(hash);
             }
         }
-
-
+        
         private static string GetStringFromHash(byte[] hash)
         {
             StringBuilder result = new StringBuilder();

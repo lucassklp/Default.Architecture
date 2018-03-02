@@ -6,7 +6,7 @@ using Domain.Entities;
 
 namespace DefaultArchitecture.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [AllowAnonymous]
     [Route("api/values")]
     public class ValuesController : Controller
     {
