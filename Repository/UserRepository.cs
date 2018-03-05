@@ -11,13 +11,13 @@ namespace Repository
 {
     public class UserRepository : IUserRepository, IUserRepositoryAsync
     {
-        private Crud<long, User> crud;
+        private ICrud<long, User> crud;
         private DaoContext context;
 
-        public UserRepository(DaoContext daoContext)
+        public UserRepository(DaoContext daoContext, ICrud<long, User> crud)
         {
             this.context = daoContext;
-            crud = new Crud<long, User>(daoContext);
+            this.crud = crud;
         }
 
         public bool IsRegistred(User user)

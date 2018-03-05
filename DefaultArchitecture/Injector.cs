@@ -20,7 +20,8 @@ namespace DefaultArchitecture
             //Injecting the service for TemplateEmailSender
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddScoped<ITemplateEmailSender, TemplateEmailSender>();
-
+            services.AddScoped(typeof(ICrud<,>), typeof(Crud<,>));
+            
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserRepositoryAsync, UserRepository>();

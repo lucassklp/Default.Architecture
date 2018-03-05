@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Security
+﻿namespace Security
 {
     public interface ISecurity<T> where T: class
     {

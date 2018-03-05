@@ -1,12 +1,13 @@
 ﻿using Domain.Entities;
 using Persistence;
+using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Repository
 {
-    public class Crud<TPrimaryKey, TEntity>
+    public class Crud<TPrimaryKey, TEntity> : ICrud<TPrimaryKey, TEntity>
         where TPrimaryKey: IComparable, IConvertible, IComparable<TPrimaryKey>, IEquatable<TPrimaryKey>
         where TEntity : class, Identifiable<TPrimaryKey>
     {
