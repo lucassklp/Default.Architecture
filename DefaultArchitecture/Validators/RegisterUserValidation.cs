@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using DefaultArchitecture.Validators.CustomValidators;
+using Domain.Entities;
 using FluentValidation;
 
 namespace DefaultArchitecture.Validators
