@@ -12,6 +12,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
 using DefaultArchitecture.Security.JwtSecurity;
 using Microsoft.ApplicationInsights.Extensibility;
+using Jobs;
 
 namespace DefaultArchitecture
 {
@@ -85,6 +86,9 @@ namespace DefaultArchitecture
             {
                 c.SwaggerDoc("v1", new Info { Title = "DefaultArchitecture API", Version = "v1" });
             });
+
+
+            services.AddJobs();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,6 +112,7 @@ namespace DefaultArchitecture
             app.UseCors("policy");
             app.UseAuthentication();
             app.UseMvc();
+            app.UseJobs();
         }
     }
 }

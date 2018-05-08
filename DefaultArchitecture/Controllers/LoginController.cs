@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Security.Claims;
 using Persistence;
 using Domain.Entities;
+using Repository;
 
 namespace DefaultArchitecture.Controllers
 {
@@ -13,16 +14,18 @@ namespace DefaultArchitecture.Controllers
     public class LoginController : Controller
     {
         DaoContext context;
-        public LoginController(DaoContext daoContext)
+        UserRepository userRepository;
+        public LoginController(DaoContext daoContext, UserRepository userRepository)
         {
             this.context = daoContext;
+            this.userRepository = userRepository;
         }
 
         [HttpPost]
         [AllowAnonymous]
         public IActionResult Login([FromBody]User user)
         {
-            ISecurity<User> security = new JwtSecurity(context);
+            ISecurity<User> security = new JwtSecurity(userRepository);
             return Ok(JsonConvert.SerializeObject(new
             {
                 token = security.Login(user)
