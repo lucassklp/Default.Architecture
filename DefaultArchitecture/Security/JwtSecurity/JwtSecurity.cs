@@ -15,9 +15,9 @@ namespace DefaultArchitecture.Security.JwtSecurity
     public class JwtSecurity : ISecurity<User>
     {
         private UserRepository userRepository;
-        public JwtSecurity(DaoContext daoContext)
+        public JwtSecurity(UserRepository repository)
         {
-            userRepository = new UserRepository(daoContext);
+            userRepository = repository;
         }
 
         public string Login(User identity)
