@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
 using DefaultArchitecture.Security.JwtSecurity;
-using Microsoft.ApplicationInsights.Extensibility;
 using Jobs;
 
 namespace DefaultArchitecture
@@ -28,8 +27,6 @@ namespace DefaultArchitecture
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Disabling Telemery
-            TelemetryConfiguration.Active.DisableTelemetry = true;
 
             //Configure the ConnectionString (Set the 'ConnectionString' section in appsettings.json)
             services.AddDbContext<DaoContext>(options => 
