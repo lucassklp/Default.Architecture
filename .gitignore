@@ -31,3 +31,5 @@ DefaultArchitecture/obj/Debug/netcoreapp2\.0/
 DefaultArchitecture/bin/Debug/netcoreapp2\.0/
 
 
+.idea
+.vs
