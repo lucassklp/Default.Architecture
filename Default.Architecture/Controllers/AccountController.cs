@@ -1,5 +1,9 @@
 ﻿using Business.Exceptions;
 using Business.Interfaces;
+using Default.Architecture.Senders.Email;
+using Default.Architecture.Senders.Email.Interfaces;
+using Default.Architecture.Validators;
+using Default.Architecture.Views;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -7,10 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
-using Default.Architecture.Senders.Email;
-using Default.Architecture.Senders.Email.Interfaces;
-using Default.Architecture.Validators;
-using Default.Architecture.Views;
 
 namespace Default.Architecture.Controllers
 {
