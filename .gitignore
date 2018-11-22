@@ -1,6 +1,3 @@
-DefaultArchitecture/bin/
-DefaultArchitecture/obj/
-
 Domain/bin/
 Domain/obj/
 
@@ -15,21 +12,6 @@ Security/obj/
 
 */bin/
 */obj/
-
-DefaultArchitecture/bin/Debug/netcoreapp2\.0/DefaultArchitecture\.dll
-
-DefaultArchitecture/bin/Debug/netcoreapp2\.0/DefaultArchitecture\.pdb
-
-DefaultArchitecture/obj/Debug/netcoreapp2\.0/DefaultArchitecture\.pdb
-
-DefaultArchitecture/obj/Debug/netcoreapp2\.0/
-
-\.vs/config/applicationhost\.config
-
-\.vs/DefaultArchitecture/v15/
-
-DefaultArchitecture/bin/Debug/netcoreapp2\.0/
-
 
 .idea
 .vs
