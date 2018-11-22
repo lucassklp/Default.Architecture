@@ -35,7 +35,7 @@ namespace Extensions
                 return GetStringFromHash(hash);
             }
         }
-        
+
         private static string GetStringFromHash(byte[] hash)
         {
             StringBuilder result = new StringBuilder();

@@ -37,7 +37,7 @@ namespace DefaultArchitecture.Security.JwtSecurity
             get => new SigningCredentials(IssuerSigningKey, SecurityAlgorithms.HmacSha256);
         }
 
-        public static TimeSpan TokenExpirationTime {get; set; } = TimeSpan.FromHours(60);
+        public static TimeSpan TokenExpirationTime { get; set; } = TimeSpan.FromHours(60);
 
         public static TimeSpan ClockSkew { get; set; } = TimeSpan.FromHours(0);
 
@@ -48,7 +48,6 @@ namespace DefaultArchitecture.Security.JwtSecurity
         public static bool ValidateIssuerSigningKey { get; set; } = true;
 
         public static bool ValidateLifetime { get; set; } = true;
-
-
+        
     }
 }
