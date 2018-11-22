@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Repository.Interfaces;
 using Domain.Entities;
 
-namespace DefaultArchitecture.Controllers
+namespace Default.Architecture.Controllers
 {
     [AllowAnonymous]
     [Route("api/values")]

@@ -10,7 +10,7 @@ using Persistence;
 using Security;
 using Domain.Entities;
 
-namespace DefaultArchitecture.Security.JwtSecurity
+namespace Default.Architecture.Security.JwtSecurity
 {
     public class JwtSecurity : ISecurity<User>
     {

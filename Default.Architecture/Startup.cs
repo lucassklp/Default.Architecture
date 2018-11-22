@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Default.Architecture.Security.JwtSecurity;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,10 +11,9 @@ using Persistence;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
-using DefaultArchitecture.Security.JwtSecurity;
 using Jobs;
 
-namespace DefaultArchitecture
+namespace Default.Architecture
 {
     public class Startup
     {

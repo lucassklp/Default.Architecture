@@ -1,6 +1,4 @@
-﻿using DefaultArchitecture.Senders.Email.Interfaces;
-using DefaultArchitecture.Services;
-using DefaultArchitecture.Views;
+﻿using Default.Architecture.Views;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using System;
@@ -10,8 +8,10 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Default.Architecture.Senders.Email.Interfaces;
+using Default.Architecture.Services;
 
-namespace DefaultArchitecture.Senders.Email
+namespace Default.Architecture.Senders.Email
 {
     public class TemplateEmailSender : ITemplateEmailSender
     {

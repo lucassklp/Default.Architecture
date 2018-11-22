@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DefaultArchitecture.Views
+namespace Default.Architecture.Views
 {
     public class AccountCreatedSuccessfullyModel : PageModel
     {

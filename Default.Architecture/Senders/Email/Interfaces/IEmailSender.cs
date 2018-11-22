@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DefaultArchitecture.Senders.Email.Interfaces
+namespace Default.Architecture.Senders.Email.Interfaces
 {
     public interface IEmailSender : ISender, ISenderAsynchronous
     {

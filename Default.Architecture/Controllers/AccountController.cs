@@ -1,9 +1,5 @@
 ﻿using Business.Exceptions;
 using Business.Interfaces;
-using DefaultArchitecture.Senders.Email;
-using DefaultArchitecture.Senders.Email.Interfaces;
-using DefaultArchitecture.Validators;
-using DefaultArchitecture.Views;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,8 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
+using Default.Architecture.Senders.Email;
+using Default.Architecture.Senders.Email.Interfaces;
+using Default.Architecture.Validators;
+using Default.Architecture.Views;
 
-namespace DefaultArchitecture.Controllers
+namespace Default.Architecture.Controllers
 {
     //[Authorize(Roles = "Administrador")]
     [AllowAnonymous]

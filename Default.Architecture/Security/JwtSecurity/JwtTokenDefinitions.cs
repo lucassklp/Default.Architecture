@@ -4,7 +4,7 @@ using System.Text;
 using Extensions;
 using Microsoft.Extensions.Configuration;
 
-namespace DefaultArchitecture.Security.JwtSecurity
+namespace Default.Architecture.Security.JwtSecurity
 {
     public class JwtTokenDefinitions
     {

@@ -1,12 +1,12 @@
-﻿using DefaultArchitecture.Senders.Email.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading;
+using Default.Architecture.Senders.Email.Interfaces;
 
-namespace DefaultArchitecture.Senders.Email
+namespace Default.Architecture.Senders.Email
 {
     public class EmailSender : IEmailSender
     {

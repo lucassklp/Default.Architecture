@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DefaultArchitecture.Security.JwtSecurity
+namespace Default.Architecture.Security.JwtSecurity
 {
     public static class JwtConfigure
     {

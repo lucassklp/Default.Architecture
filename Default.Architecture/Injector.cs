@@ -1,13 +1,13 @@
 ﻿using Business;
 using Business.Interfaces;
-using DefaultArchitecture.Senders.Email;
-using DefaultArchitecture.Senders.Email.Interfaces;
-using DefaultArchitecture.Services;
+using Default.Architecture.Senders.Email;
+using Default.Architecture.Senders.Email.Interfaces;
+using Default.Architecture.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Repository.Interfaces;
 
-namespace DefaultArchitecture
+namespace Default.Architecture
 {
     public static class Injector
     {

@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace DefaultArchitecture.Tests
+namespace Default.Architecture.Tests
 {
     public class UnitTest1
     {

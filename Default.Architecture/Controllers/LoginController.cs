@@ -1,14 +1,14 @@
 ﻿using Security;
-using DefaultArchitecture.Security.JwtSecurity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using Default.Architecture.Security.JwtSecurity;
 using Persistence;
 using Domain.Entities;
 using Repository;
 
-namespace DefaultArchitecture.Controllers
+namespace Default.Architecture.Controllers
 {
     [Route("api/login")]
     public class LoginController : Controller
