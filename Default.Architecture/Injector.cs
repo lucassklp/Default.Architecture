@@ -21,8 +21,10 @@ namespace Default.Architecture
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddScoped<ITemplateEmailSender, TemplateEmailSender>();
             services.AddScoped(typeof(ICrud<,>), typeof(Crud<,>));
-            
+
             services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<ValidatorService>();
+
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserRepositoryAsync, UserRepository>();
         }

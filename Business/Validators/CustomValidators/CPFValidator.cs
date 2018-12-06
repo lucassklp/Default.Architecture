@@ -1,11 +1,7 @@
 ﻿using FluentValidation.Resources;
 using FluentValidation.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Default.Architecture.Validators.CustomValidators
+namespace Business.Validators.CustomValidators
 {
     public class CPFValidator : PropertyValidator
     {
@@ -16,10 +12,10 @@ namespace Default.Architecture.Validators.CustomValidators
         protected override bool IsValid(PropertyValidatorContext context)
         {
             var cpf = context.PropertyValue as string;
-            string tempCpf, digito;
+            string tempCpf, digit;
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int soma, resto;
+            int sum, rest;
 
             if (string.IsNullOrWhiteSpace(cpf))
             {
@@ -44,45 +40,45 @@ namespace Default.Architecture.Validators.CustomValidators
             }
 
             tempCpf = cpf.Substring(0, 9);
-            soma = 0;
+            sum = 0;
 
             for (int i = 0; i < 9; i++)
             {
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+                sum += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
             }
 
-            resto = soma % 11;
+            rest = sum % 11;
 
-            if (resto < 2)
+            if (rest < 2)
             {
-                resto = 0;
+                rest = 0;
             }
             else
             {
-                resto = 11 - resto;
+                rest = 11 - rest;
             }
 
-            digito = resto.ToString();
-            tempCpf = tempCpf + digito;
-            soma = 0;
+            digit = rest.ToString();
+            tempCpf = tempCpf + digit;
+            sum = 0;
 
             for (int i = 0; i < 10; i++)
             {
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+                sum += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
             }
                 
-            resto = soma % 11;
-            if (resto < 2)
+            rest = sum % 11;
+            if (rest < 2)
             {
-                resto = 0;
+                rest = 0;
             }
             else
             {
-                resto = 11 - resto;
+                rest = 11 - rest;
             }
                 
-            digito = digito + resto.ToString();
-            return cpf.EndsWith(digito);
+            digit = digit + rest.ToString();
+            return cpf.EndsWith(digit);
 
         }
     }

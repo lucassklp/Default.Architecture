@@ -1,8 +1,8 @@
-﻿using Default.Architecture.Validators.CustomValidators;
+﻿using Business.Validators.CustomValidators;
 using Domain.Entities;
 using FluentValidation;
 
-namespace Default.Architecture.Validators
+namespace Business.Validators
 {
     public class RegisterUserValidation : AbstractValidator<User>
     {

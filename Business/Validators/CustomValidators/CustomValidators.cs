@@ -1,10 +1,6 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Default.Architecture.Validators.CustomValidators
+namespace Business.Validators.CustomValidators
 {
     public static class CustomValidators
     {
@@ -12,6 +8,5 @@ namespace Default.Architecture.Validators.CustomValidators
         {
             return ruleBuilder.SetValidator(new CPFValidator());
         }
-
     }
 }

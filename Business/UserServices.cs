@@ -4,6 +4,10 @@ using Repository.Interfaces;
 using Extensions;
 using Domain.Entities;
 using System;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Business.Validators;
 
 namespace Business
 {
@@ -11,11 +15,12 @@ namespace Business
     {
         IUserRepository userRepository;
         IUserRepositoryAsync userRepositoryAsync;
-
-        public UserServices(IUserRepository userRepository, IUserRepositoryAsync userRepositoryAsync)
+        private ValidatorService validator;
+        public UserServices(IUserRepository userRepository, IUserRepositoryAsync userRepositoryAsync, ValidatorService validator)
         {
             this.userRepository = userRepository;
             this.userRepositoryAsync = userRepositoryAsync;
+            this.validator = validator;
         }
 
         public User Register(User user)
@@ -31,23 +36,30 @@ namespace Business
             }
         }
 
-
         public IObservable<User> RegisterAsync(User user)
         {
-            throw new NotImplementedException();
-            //return Observable.Create<User>(x => user);
-            //this.userRepositoryAsync.IsRegistredAsync(user).Subscribe(IsRegistred =>
-            //{
-            //    if (!IsRegistred)
-            //    {
-            //        this.userRepositoryAsync.RegisterAsync(user);
-            //        ac.Invoke();
-            //    }
-            //    else throw new UserExistentException(user);
-            //}, 
-            //ex => {
-
-            //}, )
+            return this.validator.Check(new RegisterUserValidation()).SelectMany(validator =>
+            {
+                var validation = validator.Validate(user);
+                if(validation.IsValid){
+                    return this.userRepositoryAsync.IsRegistredAsync(user).SelectMany(isRegistred =>
+                    {
+                        if (!isRegistred)
+                        {
+                            user.Password = user.Password.ToSHA512();
+                            return this.userRepositoryAsync.RegisterAsync(user);
+                        }
+                        else
+                        {
+                            throw new UserExistentException(user);
+                        }
+                    });
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            });
         }
 
     }
