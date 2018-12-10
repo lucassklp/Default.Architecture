@@ -1,4 +1,4 @@
-﻿using Default.Architecture.Security.JwtSecurity;
+﻿using Default.Architecture.Authentication.Jwt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,9 +9,12 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Persistence;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json.Serialization;
 using Jobs;
+using NSwag.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using Default.Architecture.Middlewares;
+using Microsoft.AspNetCore.Http;
 
 namespace Default.Architecture
 {
@@ -64,6 +67,7 @@ namespace Default.Architecture
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            mvc.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             mvc.AddJsonOptions(config =>
             {
@@ -79,10 +83,7 @@ namespace Default.Architecture
             });
 
             //Add the Swagger for API documentation
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "DefaultArchitecture API", Version = "v1" });
-            });
+            services.AddSwaggerDocument();
 
 
             services.AddJobs();
@@ -91,21 +92,12 @@ namespace Default.Architecture
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            app.UseExceptionHandlingMiddleware();
+            
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
+            app.UseSwaggerUi3();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DefaultArchitecture V1");
-            });
-            
             app.UseCors("policy");
             app.UseAuthentication();
             app.UseMvc();

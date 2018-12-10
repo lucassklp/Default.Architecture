@@ -6,6 +6,7 @@ using System.Linq;
 using Domain.Entities;
 using System;
 using System.Reactive.Linq;
+using Domain;
 
 namespace Repository
 {
@@ -24,14 +25,15 @@ namespace Repository
         {
             return this.context.Manipulate<User>().Any(x => x.Email == user.Email);
         }
+        
 
-        public User Login(string email, string password)
+        public User Login(ICredential credential)
         {
 
             var user = context.Manipulate<User>()
                 .Include(u => u.UserRoles)
                     .ThenInclude(userRoles => userRoles.Role)
-                .Single(x => x.Email == email && x.Password == password);
+                .Single(x => x.Login == credential.Login && x.Password == credential.Password);
 
 
             return user;
@@ -53,9 +55,9 @@ namespace Repository
             return Observable.ToAsync<User, bool>(this.IsRegistred)(user);
         }
 
-        public IObservable<User> LoginAsync(string email, string password)
+        public IObservable<User> LoginAsync(ICredential credential)
         {
-            return Observable.ToAsync<string, string, User>(this.Login)(email, password);
+            return Observable.ToAsync<ICredential, User>(this.Login)(credential);
         }
 
         public IObservable<User> RegisterAsync(User user)
@@ -67,5 +69,6 @@ namespace Repository
         {
             return Observable.ToAsync(this.SelectAll)();
         }
+
     }
 }

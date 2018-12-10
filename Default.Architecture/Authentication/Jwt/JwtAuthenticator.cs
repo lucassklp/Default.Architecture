@@ -1,28 +1,26 @@
 ﻿using Domain;
-using Repository;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
-using Persistence;
-using Security;
 using Domain.Entities;
+using Business.Interfaces;
 
-namespace Default.Architecture.Security.JwtSecurity
+namespace Default.Architecture.Authentication.Jwt
 {
-    public class JwtSecurity : ISecurity<User>
+    public class JwtAuthenticator : IAuthenticator<ICredential>
     {
-        private UserRepository userRepository;
-        public JwtSecurity(UserRepository repository)
+        private ILoginServices loginService;
+        public JwtAuthenticator(ILoginServices repository)
         {
-            userRepository = repository;
+            loginService = repository;
         }
 
-        public string Login(User identity)
+        public string Login(ICredential credential)
         {
-            var existUser = userRepository.Login(identity.Email, identity.Password);
+            var existUser = loginService.Login(credential);
 
             if (existUser != null)
             {
@@ -31,9 +29,9 @@ namespace Default.Architecture.Security.JwtSecurity
             else return null;
         }
 
-        public string Logout(User identity)
+        public string Logout(ICredential credential)
         {
-            
+            this.loginService.Logout(credential);
             return null;
         }
 
@@ -61,10 +59,7 @@ namespace Default.Architecture.Security.JwtSecurity
                 NotBefore = DateTime.Now
             });
             
-
             return handler.WriteToken(securityToken);
         }
-
-
     }
 }

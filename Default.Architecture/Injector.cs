@@ -1,8 +1,8 @@
 ﻿using Business;
 using Business.Interfaces;
-using Default.Architecture.Senders.Email;
-using Default.Architecture.Senders.Email.Interfaces;
-using Default.Architecture.Services;
+using Default.Architecture.Authentication;
+using Default.Architecture.Authentication.Jwt;
+using Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Repository.Interfaces;
@@ -17,12 +17,11 @@ namespace Default.Architecture
         /// <param name="services"></param>
         public static void InjectServices(this IServiceCollection services)
         {
-            //Injecting the service for TemplateEmailSender
-            services.AddScoped<IViewRenderService, ViewRenderService>();
-            services.AddScoped<ITemplateEmailSender, TemplateEmailSender>();
             services.AddScoped(typeof(ICrud<,>), typeof(Crud<,>));
+            services.AddScoped<IAuthenticator<ICredential>, JwtAuthenticator>();
 
             services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<ILoginServices, LoginServices>();
             services.AddTransient<ValidatorService>();
 
             services.AddTransient<IUserRepository, UserRepository>();

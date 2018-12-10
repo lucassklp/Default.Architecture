@@ -1,5 +1,4 @@
 ﻿using Business.Interfaces;
-using Default.Architecture.Senders.Email.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,21 +15,19 @@ namespace Default.Architecture.Controllers
     {
         private IUserServices userServices;
         private ILogger logger;
-        private ITemplateEmailSender templateEmailSender;
         private IConfiguration configuration;
 
         public AccountController(IUserServices userServices, 
             ILogger<AccountController> logger,
-            ITemplateEmailSender templateEmailSender,
             IConfiguration configuration)
         {
             this.userServices = userServices;
             this.logger = logger;
-            this.templateEmailSender = templateEmailSender;
             this.configuration = configuration;
         }
 
         [HttpPost]
+        [Route("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
             var x = await userServices.RegisterAsync(user);

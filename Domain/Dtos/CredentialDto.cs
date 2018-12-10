@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Domain.Dtos
 {
-    class CredentialsDto
+    public class CredentialDto : ICredential
     {
         public string Login { get; set; }
         public string Password { get; set; }
-
     }
 }

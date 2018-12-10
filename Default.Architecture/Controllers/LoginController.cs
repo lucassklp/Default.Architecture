@@ -1,37 +1,41 @@
-﻿using Security;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
-using Default.Architecture.Security.JwtSecurity;
-using Persistence;
-using Domain.Entities;
-using Repository;
+using Domain;
+using Domain.Dtos;
+using Default.Architecture.Authentication;
+using Business.Exceptions;
 
 namespace Default.Architecture.Controllers
 {
     [Route("api/login")]
     public class LoginController : Controller
     {
-        DaoContext context;
-        UserRepository userRepository;
-        public LoginController(DaoContext daoContext, UserRepository userRepository)
+        IAuthenticator<ICredential> authenticator;
+        public LoginController(IAuthenticator<ICredential> authenticator)
         {
-            this.context = daoContext;
-            this.userRepository = userRepository;
+            this.authenticator = authenticator;
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login([FromBody]User user)
+        public IActionResult Login([FromBody] CredentialDto user)
         {
-            ISecurity<User> security = new JwtSecurity(userRepository);
-            return Ok(JsonConvert.SerializeObject(new
+            try
             {
-                token = security.Login(user)
-            }));
-        }
+                var token = authenticator.Login(user);
+                return Ok(JsonConvert.SerializeObject(new
+                {
+                    token
+                }));
+            }
+            catch (BusinessException)
+            {
+                return Unauthorized();
+            }
 
+        }
         
         [HttpGet]
         public IActionResult GetUserInfo()
@@ -41,7 +45,7 @@ namespace Default.Architecture.Controllers
             return Ok(JsonConvert.SerializeObject(new 
             {
                 UserName = claimsIdentity.Name,
-                Claims = claimsIdentity.Claims
+                claimsIdentity.Claims
             }));
         }
     }

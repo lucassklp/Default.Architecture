@@ -38,27 +38,20 @@ namespace Business
 
         public IObservable<User> RegisterAsync(User user)
         {
-            return this.validator.Check(new RegisterUserValidation()).SelectMany(validator =>
+            return this.validator.CheckAsync(new RegisterUserValidation(), user).SelectMany(validator =>
             {
-                var validation = validator.Validate(user);
-                if(validation.IsValid){
-                    return this.userRepositoryAsync.IsRegistredAsync(user).SelectMany(isRegistred =>
-                    {
-                        if (!isRegistred)
-                        {
-                            user.Password = user.Password.ToSHA512();
-                            return this.userRepositoryAsync.RegisterAsync(user);
-                        }
-                        else
-                        {
-                            throw new UserExistentException(user);
-                        }
-                    });
-                }
-                else
+                return this.userRepositoryAsync.IsRegistredAsync(user).SelectMany(isRegistred =>
                 {
-                    throw new Exception();
-                }
+                    if (!isRegistred)
+                    {
+                        user.Password = user.Password.ToSHA512();
+                        return this.userRepositoryAsync.RegisterAsync(user);
+                    }
+                    else
+                    {
+                        throw new UserExistentException(user);
+                    }
+                });
             });
         }
 
