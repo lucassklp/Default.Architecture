@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reactive.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using Domain.Entities;
@@ -10,7 +11,7 @@ using Business.Interfaces;
 
 namespace Default.Architecture.Authentication.Jwt
 {
-    public class JwtAuthenticator : IAuthenticator<ICredential>
+    public class JwtAuthenticator : IAuthenticator<ICredential>, IAuthenticatorAsync<ICredential>
     {
         private ILoginServices loginService;
         public JwtAuthenticator(ILoginServices repository)
@@ -60,6 +61,11 @@ namespace Default.Architecture.Authentication.Jwt
             });
             
             return handler.WriteToken(securityToken);
+        }
+
+        public IObservable<string> LoginAsync(ICredential identity)
+        {
+            return this.loginService.LoginAsync(identity).Select(user => user != null ? GenerateToken(user) : null);
         }
     }
 }

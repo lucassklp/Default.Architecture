@@ -11,5 +11,7 @@ namespace Repository.Interfaces
         User Login(ICredential credential);
         List<User> SelectAll();
         User Register(User user);
+
+        IObservable<User> LoginAsync(ICredential credential);    
     }
 }
