@@ -8,5 +8,6 @@ namespace Business.Interfaces
     {
         User Login(ICredential credential);
         void Logout(ICredential credential);
+        IObservable<User> LoginAsync(ICredential credential);
     }
 }

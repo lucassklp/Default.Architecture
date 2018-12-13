@@ -1,40 +1,28 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Reactive.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Domain;
 using Domain.Dtos;
 using Default.Architecture.Authentication;
-using Business.Exceptions;
 
 namespace Default.Architecture.Controllers
 {
     [Route("api/login")]
     public class LoginController : Controller
     {
-        IAuthenticator<ICredential> authenticator;
-        public LoginController(IAuthenticator<ICredential> authenticator)
+        IAuthenticatorAsync<ICredential> authenticator;
+        public LoginController(IAuthenticatorAsync<ICredential> authenticator)
         {
             this.authenticator = authenticator;
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login([FromBody] CredentialDto user)
+        public async Task<IActionResult> Login([FromBody] CredentialDto user)
         {
-            try
-            {
-                var token = authenticator.Login(user);
-                return Ok(JsonConvert.SerializeObject(new
-                {
-                    token
-                }));
-            }
-            catch (BusinessException)
-            {
-                return Unauthorized();
-            }
-
+            return await authenticator.LoginAsync(user).Select(token => Json(new { token }));
         }
         
         [HttpGet]
@@ -42,11 +30,11 @@ namespace Default.Architecture.Controllers
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
 
-            return Ok(JsonConvert.SerializeObject(new 
+            return Json(new 
             {
                 UserName = claimsIdentity.Name,
                 claimsIdentity.Claims
-            }));
+            });
         }
     }
 }

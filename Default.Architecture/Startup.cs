@@ -11,10 +11,8 @@ using Persistence;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Jobs;
-using NSwag.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Default.Architecture.Middlewares;
-using Microsoft.AspNetCore.Http;
 
 namespace Default.Architecture
 {
@@ -83,7 +81,7 @@ namespace Default.Architecture
             });
 
             //Add the Swagger for API documentation
-            services.AddSwaggerDocument();
+            services.AddSwaggerDocument(config => config.Title = "Default.Architecture");
 
 
             services.AddJobs();

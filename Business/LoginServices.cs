@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Linq;
-using System.Text;
 using Business.Exceptions;
 using Business.Interfaces;
 using Business.Validators;
 using Domain;
 using Domain.Entities;
-using Repository;
 using Repository.Interfaces;
 
 namespace Business
@@ -27,8 +24,8 @@ namespace Business
         {
             try
             {
-                this.validator.Check(new CredentialValidation(), credential);
-                return this.repository.Login(credential);
+                validator.Check(new CredentialValidation(), credential);
+                return repository.Login(credential);
             }
             catch (InvalidOperationException)
             {
@@ -38,7 +35,13 @@ namespace Business
 
         public void Logout(ICredential credential)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public IObservable<User> LoginAsync(ICredential credential)
+        {
+            return validator.CheckAsync(new CredentialValidation(), credential)
+                .SelectMany(result => repository.LoginAsync(credential));
         }
     }
 }

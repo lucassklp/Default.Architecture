@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using System;
 
 namespace Business.Exceptions
 {
