@@ -19,14 +19,12 @@ namespace Default.Architecture
         {
             services.AddScoped(typeof(ICrud<,>), typeof(Crud<,>));
             services.AddScoped<IAuthenticator<ICredential>, JwtAuthenticator>();
-            services.AddScoped<IAuthenticatorAsync<ICredential>, JwtAuthenticator>();
             
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<ILoginServices, LoginServices>();
             services.AddTransient<ValidatorService>();
 
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserRepositoryAsync, UserRepository>();
         }
     }
 }

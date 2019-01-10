@@ -7,11 +7,7 @@ namespace Repository.Interfaces
 {
     public interface IUserRepository
     {
-        bool IsRegistred(User user);
-        User Login(ICredential credential);
-        List<User> SelectAll();
-        User Register(User user);
-
-        IObservable<User> LoginAsync(ICredential credential);    
+        IObservable<bool> IsRegistred(User user);
+        IObservable<User> Login(ICredential credential);
     }
 }

@@ -8,10 +8,10 @@ namespace Repository.Interfaces
         where TPrimaryKey : IComparable, IConvertible, IComparable<TPrimaryKey>, IEquatable<TPrimaryKey>
         where TEntity : class, Identifiable<TPrimaryKey>
     {
-        void Create(TEntity item);
-        TEntity Delete(TPrimaryKey id);
-        TEntity Read(TPrimaryKey id);
-        List<TEntity> SelectAll();
-        TEntity Update(TEntity item);
+        IObservable<TEntity> Create(TEntity item);
+        IObservable<TEntity> Delete(TPrimaryKey id);
+        IObservable<TEntity> Read(TPrimaryKey id);
+        IObservable<List<TEntity>> Paged(int page, int pageSize);
+        IObservable<TEntity> Update(TEntity item);
     }
 }

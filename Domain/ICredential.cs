@@ -3,6 +3,6 @@
     public interface ICredential
     {
         string Login { get; }
-        string Password { get; }
+        string Password { get; set; }
     }
 }

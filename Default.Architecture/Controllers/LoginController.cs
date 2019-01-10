@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using Domain;
 using Domain.Dtos;
 using Default.Architecture.Authentication;
+using System;
+using System.Reactive.Threading.Tasks;
 
 namespace Default.Architecture.Controllers
 {
     [Route("api/login")]
     public class LoginController : Controller
     {
-        IAuthenticatorAsync<ICredential> authenticator;
-        public LoginController(IAuthenticatorAsync<ICredential> authenticator)
+        IAuthenticator<ICredential> authenticator;
+        public LoginController(IAuthenticator<ICredential> authenticator)
         {
             this.authenticator = authenticator;
         }
@@ -22,7 +24,13 @@ namespace Default.Architecture.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] CredentialDto user)
         {
-            return await authenticator.LoginAsync(user).Select(token => Json(new { token }));
+            IObservable<JsonResult> response = authenticator.Login(user).Select(token =>
+            {
+                return Json(new { token });
+            });
+            response.Subscribe();
+
+            return await response;
         }
         
         [HttpGet]

@@ -12,38 +12,25 @@ namespace Business
     public class UserServices : IUserServices
     {
         IUserRepository userRepository;
-        IUserRepositoryAsync userRepositoryAsync;
         private ValidatorService validator;
-        public UserServices(IUserRepository userRepository, IUserRepositoryAsync userRepositoryAsync, ValidatorService validator)
+        ICrud<long, User> crud;
+        public UserServices(IUserRepository userRepository, ValidatorService validator, ICrud<long, User> crud)
         {
             this.userRepository = userRepository;
-            this.userRepositoryAsync = userRepositoryAsync;
             this.validator = validator;
-        }
-
-        public User Register(User user)
-        {
-            user.Password = user.Password.ToSHA512();
-            if (this.userRepository.IsRegistred(user))
-            {
-                throw new UserExistentException(user);
-            }
-            else
-            {
-                return userRepository.Register(user);
-            }
+            this.crud = crud;
         }
 
         public IObservable<User> RegisterAsync(User user)
         {
             return this.validator.CheckAsync(new RegisterUserValidation(), user).SelectMany(validator =>
             {
-                return this.userRepositoryAsync.IsRegistredAsync(user).SelectMany(isRegistred =>
+                return this.userRepository.IsRegistred(user).SelectMany(isRegistred =>
                 {
                     if (!isRegistred)
                     {
                         user.Password = user.Password.ToSHA512();
-                        return this.userRepositoryAsync.RegisterAsync(user);
+                        return this.crud.Create(user);
                     }
                     else
                     {
@@ -52,6 +39,5 @@ namespace Business
                 });
             });
         }
-
     }
 }

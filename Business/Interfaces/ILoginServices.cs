@@ -6,8 +6,6 @@ namespace Business.Interfaces
 {
     public interface ILoginServices
     {
-        User Login(ICredential credential);
-        void Logout(ICredential credential);
-        IObservable<User> LoginAsync(ICredential credential);
+        IObservable<User> Login(ICredential credential);
     }
 }

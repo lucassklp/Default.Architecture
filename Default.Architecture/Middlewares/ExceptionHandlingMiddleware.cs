@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,19 +44,27 @@ namespace Default.Architecture.Middlewares
                 logger.LogInformation(ex.Message);
                 httpContext.Response.StatusCode = 400;
                 httpContext.Response.ContentType = "application/json";
-                await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(ex.Errors.Select(error => new { error = error.ErrorMessage, property = error.PropertyName })));
+                await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(new {
+                    message = ex.Errors.Select(error => new {
+                        property = error.PropertyName, error = error.ErrorMessage
+                    })}
+                ));
             }
             catch (Exception ex) //Unhandled Exceptions
             {
                 var guid = Guid.NewGuid().ToString();
 
                 var errorLog = new StringBuilder();
-                errorLog.Append($"An error occurred (Guid = {guid}): {ex.Message}");
-                errorLog.Append($"Stacktrace: {ex.StackTrace}");
-                errorLog.Append($"Request Path: {httpContext.Request.Path}");
-                errorLog.Append($"Request Method: {httpContext.Request.Method}");
-                errorLog.Append($"Request Header: {httpContext.Request.Headers.Select(x => $"{x.Key}:{x.Value}")}");
-                errorLog.Append($"Request Body: {httpContext.Request.Body}");
+                errorLog.AppendLine($"An error occurred (Guid = {guid}): {ex.Message}");
+                errorLog.AppendLine($"Request Path: {httpContext.Request.Path}");
+                errorLog.AppendLine($"Request Method: {httpContext.Request.Method}");
+                errorLog.AppendLine($"Request Headers:");
+                foreach (var header in httpContext.Request.Headers)
+                {
+                    errorLog.AppendLine($"\t{header.Key}:{header.Value}");
+                }
+                //string body = new StreamReader(httpContext.Request.Body).ReadToEnd();
+                //errorLog.AppendLine($"Request Body: {body}");
 
                 logger.LogError(errorLog.ToString());
 

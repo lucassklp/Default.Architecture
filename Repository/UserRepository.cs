@@ -7,68 +7,40 @@ using Domain.Entities;
 using System;
 using System.Reactive.Linq;
 using Domain;
+using System.Reactive.Disposables;
 
 namespace Repository
 {
-    public class UserRepository : IUserRepository, IUserRepositoryAsync
+    public class UserRepository : IUserRepository
     {
-        private ICrud<long, User> crud;
         private DaoContext context;
 
-        public UserRepository(DaoContext daoContext, ICrud<long, User> crud)
+        public UserRepository(DaoContext daoContext)
         {
             this.context = daoContext;
-            this.crud = crud;
         }
 
-        public bool IsRegistred(User user)
+        public IObservable<bool> IsRegistred(User user)
         {
-            return this.context.Manipulate<User>().Any(x => x.Email == user.Email);
+            return Observable.Create<bool>(observer =>
+            {
+                observer.OnNext(this.context.Manipulate<User>().Any(x => x.Email == user.Email));
+                return Disposable.Empty;
+            });
         }
-        
 
-        public User Login(ICredential credential)
+        public IObservable<User> Login(ICredential credential)
         {
+            return Observable.Create<User>(observer =>
+            {
+                var user = context.Manipulate<User>()
+                    .Include(u => u.UserRoles)
+                        .ThenInclude(userRoles => userRoles.Role)
+                    .Single(x => x.Login == credential.Login && x.Password == credential.Password);
 
-            var user = context.Manipulate<User>()
-                .Include(u => u.UserRoles)
-                    .ThenInclude(userRoles => userRoles.Role)
-                .Single(x => x.Login == credential.Login && x.Password == credential.Password);
-
-
-            return user;
+                observer.OnNext(user);
+                return Disposable.Empty;
+            });
         }
-
-        public User Register(User user)
-        {
-            this.crud.Create(user);
-            return user;
-        }
-
-        public List<User> SelectAll()
-        {
-            return crud.SelectAll();
-        }
-
-        public IObservable<bool> IsRegistredAsync(User user)
-        {
-            return Observable.ToAsync<User, bool>(this.IsRegistred)(user);
-        }
-
-        public IObservable<User> LoginAsync(ICredential credential)
-        {
-            return Observable.ToAsync<ICredential, User>(this.Login)(credential);
-        }
-
-        public IObservable<User> RegisterAsync(User user)
-        {
-            return Observable.ToAsync<User, User>(this.Register)(user);
-        }
-
-        public IObservable<List<User>> SelectAllAsync()
-        {
-            return Observable.ToAsync(this.SelectAll)();
-        }
-
     }
 }

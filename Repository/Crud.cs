@@ -4,6 +4,8 @@ using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 
 namespace Repository
 {
@@ -18,36 +20,60 @@ namespace Repository
             context = daoContext;
         }
 
-        public void Create(TEntity item)
+        public IObservable<TEntity> Create(TEntity item)
         {
-            context.Manipulate<TEntity>().Add(item);
-            context.SaveChanges();
+            return Observable.Create<TEntity>(observer =>
+            {
+                context.Manipulate<TEntity>().Add(item);
+                context.SaveChanges();
+                observer.OnNext(item);
+                return Disposable.Empty;
+            });
         }
 
-        public TEntity Delete(TPrimaryKey id)
+        public IObservable<TEntity> Delete(TPrimaryKey id)
         {
-            var selectedItem = context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault();
-            context.Manipulate<TEntity>().Remove(selectedItem);
-            context.SaveChanges();
-            return selectedItem;
+            return Observable.Create<TEntity>(observer =>
+            {
+                var selectedItem = context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault();
+                context.Manipulate<TEntity>().Remove(selectedItem);
+                context.SaveChanges();
+                observer.OnNext(selectedItem);
+                return Disposable.Empty;
+            });
         }
 
-        public TEntity Read(TPrimaryKey id)
+        public IObservable<TEntity> Read(TPrimaryKey id)
         {
-            var selectedItem = context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault();
-            return selectedItem;
+            return Observable.Create<TEntity>(observer =>
+            {
+                observer.OnNext(context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault());
+                return Disposable.Empty;
+            });
         }
 
-        public List<TEntity> SelectAll()
+        public IObservable<List<TEntity>> Paged(int page, int pageSize)
         {
-            return context.Manipulate<TEntity>().ToList();
+            return Observable.Create<List<TEntity>>(observer =>
+            {
+                var items = context.Manipulate<TEntity>()
+                    .Skip(page * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+                observer.OnNext(items);
+                return Disposable.Empty;
+            });
         }
 
-        public TEntity Update(TEntity item)
+        public IObservable<TEntity> Update(TEntity item)
         {
-            context.Manipulate<TEntity>().Update(item);
-            context.SaveChanges();
-            return item;
+            return Observable.Create<TEntity>(observer =>
+            {
+                context.Manipulate<TEntity>().Update(item);
+                context.SaveChanges();
+                observer.OnNext(item);
+                return Disposable.Empty;
+            });
         }
     }
 }
