@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
-using System;
+using Extensions;
 
 namespace Default.Architecture.Controllers
 {
@@ -23,13 +23,9 @@ namespace Default.Architecture.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
-            IObservable<IActionResult> response = userServices.RegisterAsync(user).Select(registredUser =>
-            {
-                return Ok(registredUser);
-            });
-            response.Subscribe();
-            return await response;
-
+            return await userServices.RegisterAsync(user)
+                .Select(registredUser => Ok(registredUser))
+                .ToActionResult();
         }
     }
 }

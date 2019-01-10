@@ -1,7 +1,6 @@
 ﻿using Domain;
 using Domain.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace Repository.Interfaces
 {

@@ -2,32 +2,57 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 
 namespace Core.Http
 {
-    public abstract class Consumer
+    public class Consumer
     {
-        public string BaseUrl { get; private set; }
-        private IDeserializer deserializer;
-
-        public Consumer(string baseUrl)
+        private HttpClient http;
+        
+        public Consumer(HttpClient httpClient)
         {
-            this.BaseUrl = baseUrl;
+            http = httpClient;
         }
         
-
-        private string Resolve(string path)
+        public IObservable<TReturn> Post<TReturn, TEntity>(string path, TEntity body, IDictionary<string, string> headers = null)
         {
-            return $"{this.BaseUrl}/{path}";
-        }
+            return Observable.Create<TReturn>(async observer =>
+            {
+                try
+                {
+                    var jsonContent = JsonConvert.SerializeObject(body);
+                    var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
+                    var response = await http.PostAsync(path, contentString);
 
+                    if (response.IsSuccessStatusCode)
+                    {
+                        using (var reader = new StreamReader(await response.Content.ReadAsStreamAsync(), Encoding.UTF8))
+                        {
+                            string responseText = reader.ReadToEnd();
+                            var objReturn = JsonConvert.DeserializeObject<TReturn>(responseText);
+                            observer.OnNext(objReturn);
+                            observer.OnCompleted();
+                        }
+                    }
+                    else
+                    {
+                        throw new HttpResponseException();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    observer.OnError(ex);
+                }
 
-        public IObservable<TReturn> Post<TReturn>(string path, IHttpBody body = null, IDictionary<string, string> headers = null)
-        {
-            Observable.Return(JsonConvert.DeserializeObject<TReturn>(""));
+                return Disposable.Empty;
+            });
+           
         }
     }
 }

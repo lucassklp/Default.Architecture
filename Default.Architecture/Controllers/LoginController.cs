@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using Domain;
 using Domain.Dtos;
 using Default.Architecture.Authentication;
-using System;
-using System.Reactive.Threading.Tasks;
+using Extensions;
 
 namespace Default.Architecture.Controllers
 {
@@ -24,13 +23,13 @@ namespace Default.Architecture.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] CredentialDto user)
         {
-            IObservable<JsonResult> response = authenticator.Login(user).Select(token =>
+            return await authenticator.Login(user).Select(token =>
             {
-                return Json(new { token });
-            });
-            response.Subscribe();
-
-            return await response;
+                return Json(new
+                {
+                    token
+                });
+            }).ToActionResult();
         }
         
         [HttpGet]

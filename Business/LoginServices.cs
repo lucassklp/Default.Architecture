@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Reactive.Linq;
-using Business.Exceptions;
 using Business.Interfaces;
 using Business.Validators;
 using Domain;
 using Domain.Entities;
-using Extensions;
 using Repository.Interfaces;
 
 namespace Business
