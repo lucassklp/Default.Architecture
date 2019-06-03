@@ -7,11 +7,21 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Extensions\Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions">
+      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.hosting.abstractions\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

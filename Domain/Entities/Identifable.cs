@@ -3,8 +3,8 @@
 namespace Domain.Entities
 {
     public interface Identifiable<T>
-        where T: IComparable, IConvertible, IComparable<T>, IEquatable<T>
+        where T : IComparable, IConvertible, IComparable<T>, IEquatable<T>
     {
-        T ID { get; set; }
+        T Id { get; set; }
     }
 }

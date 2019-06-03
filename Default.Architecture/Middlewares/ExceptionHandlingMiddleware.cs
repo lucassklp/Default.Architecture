@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Business.Exceptions;
+﻿using Business.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Default.Architecture.Middlewares
 {
@@ -26,7 +26,7 @@ namespace Default.Architecture.Middlewares
         {
             try
             {
-               await _next(httpContext);
+                await _next(httpContext);
             }
             catch (BusinessException ex) //Business Exceptions
             {
@@ -43,10 +43,14 @@ namespace Default.Architecture.Middlewares
                 logger.LogInformation(ex.Message);
                 httpContext.Response.StatusCode = 400;
                 httpContext.Response.ContentType = "application/json";
-                await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(new {
-                    message = ex.Errors.Select(error => new {
-                        property = error.PropertyName, error = error.ErrorMessage
-                    })}
+                await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(new
+                {
+                    message = ex.Errors.Select(error => new
+                    {
+                        property = error.PropertyName,
+                        error = error.ErrorMessage
+                    })
+                }
                 ));
             }
             catch (Exception ex) //Unhandled Exceptions

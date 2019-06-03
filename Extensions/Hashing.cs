@@ -5,7 +5,6 @@ namespace Extensions
 {
     public static class Hashing
     {
-
         public static string ToSHA256(this string input)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -45,6 +44,5 @@ namespace Extensions
             }
             return result.ToString();
         }
-
     }
 }

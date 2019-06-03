@@ -7,7 +7,7 @@ namespace Jobs
     {
         public void Schedule()
         {
-            Schedule<TestJob>().ToRunNow().AndEvery(30).Minutes();
+            Schedule<TestJob>().ToRunNow().AndEvery(5).Minutes();
         }
     }
 }

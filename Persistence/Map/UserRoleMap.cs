@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Domain.Entities;
 
 namespace Persistence.Map
 {
@@ -10,9 +10,9 @@ namespace Persistence.Map
         {
             builder.ToTable("user_has_roles");
 
-            builder.Property(x => x.UserId).HasColumnName("user_UserID");
-            builder.Property(x => x.RoleId).HasColumnName("roles_RolesID");
-            
+            builder.Property(x => x.UserId);
+            builder.Property(x => x.RoleId);
+
             builder.HasOne(x => x.Role)
                 .WithMany(x => x.UserRoles)
                 .HasForeignKey(x => x.RoleId);

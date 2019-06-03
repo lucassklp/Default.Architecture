@@ -1,79 +1,58 @@
-﻿using Domain.Entities;
-using Persistence;
-using Repository.Interfaces;
+﻿using Core;
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
 namespace Repository
 {
-    public class Crud<TPrimaryKey, TEntity> : ICrud<TPrimaryKey, TEntity>
-        where TPrimaryKey: IComparable, IConvertible, IComparable<TPrimaryKey>, IEquatable<TPrimaryKey>
+    public class Crud<TPrimaryKey, TEntity>
+        where TPrimaryKey : IComparable, IConvertible, IComparable<TPrimaryKey>, IEquatable<TPrimaryKey>
         where TEntity : class, Identifiable<TPrimaryKey>
     {
-        private DaoContext context;
+        private DbContext context;
 
-        public Crud(DaoContext daoContext)
+        public Crud(DbContext daoContext)
         {
             context = daoContext;
         }
 
-        public IObservable<TEntity> Create(TEntity item)
+        public TEntity Create(TEntity item)
         {
-            return Observable.Create<TEntity>(observer =>
-            {
-                context.Manipulate<TEntity>().Add(item);
-                context.SaveChanges();
-                observer.OnNext(item);
-                return Disposable.Empty;
-            });
+            context.Set<TEntity>().Add(item);
+            context.SaveChanges();
+            return item;
         }
 
-        public IObservable<TEntity> Delete(TPrimaryKey id)
+        public IObservable<TEntity> CreateAsync(TEntity item) => SingleObservable.Create(() => Create(item));
+
+        public TEntity Delete(TPrimaryKey id)
         {
-            return Observable.Create<TEntity>(observer =>
-            {
-                var selectedItem = context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault();
-                context.Manipulate<TEntity>().Remove(selectedItem);
-                context.SaveChanges();
-                observer.OnNext(selectedItem);
-                return Disposable.Empty;
-            });
+            var selectedItem = Read(id);
+            context.Set<TEntity>().Remove(selectedItem);
+            context.SaveChanges();
+            return selectedItem;
         }
 
-        public IObservable<TEntity> Read(TPrimaryKey id)
+        public IObservable<TEntity> DeleteAsync(TPrimaryKey id) => SingleObservable.Create(() => Delete(id));
+
+        public TEntity Read(TPrimaryKey id)
         {
-            return Observable.Create<TEntity>(observer =>
-            {
-                observer.OnNext(context.Manipulate<TEntity>().Where(x => x.ID.Equals(id)).FirstOrDefault());
-                return Disposable.Empty;
-            });
+            return context.Set<TEntity>()
+                .Where(x => x.Id.Equals(id))
+                .FirstOrDefault();
         }
 
-        public IObservable<List<TEntity>> Paged(int page, int pageSize)
+        public IObservable<TEntity> ReadAsync(TPrimaryKey id) => SingleObservable.Create(() => Read(id));
+
+        public TEntity Update(TEntity item)
         {
-            return Observable.Create<List<TEntity>>(observer =>
-            {
-                var items = context.Manipulate<TEntity>()
-                    .Skip(page * pageSize)
-                    .Take(pageSize)
-                    .ToList();
-                observer.OnNext(items);
-                return Disposable.Empty;
-            });
+            context.Set<TEntity>().Update(item);
+            context.SaveChanges();
+            return item;
         }
 
-        public IObservable<TEntity> Update(TEntity item)
-        {
-            return Observable.Create<TEntity>(observer =>
-            {
-                context.Manipulate<TEntity>().Update(item);
-                context.SaveChanges();
-                observer.OnNext(item);
-                return Disposable.Empty;
-            });
-        }
+        public IObservable<TEntity> UpdateAsync(TEntity item) => SingleObservable.Create(() => Update(item));
     }
 }

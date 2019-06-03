@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Domain.Entities;
 
 namespace Persistence.Map
 {
@@ -10,12 +10,12 @@ namespace Persistence.Map
         {
             builder.ToTable("user");
 
-            builder.Property(x => x.ID).HasColumnName("UserID");
-            builder.Property(x => x.Name).HasColumnName("Name");
-            builder.Property(x => x.Password).HasColumnName("Password");
-            builder.Property(x => x.Email).HasColumnName("Email");
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Name).HasMaxLength(100);
+            builder.Property(x => x.Password).HasMaxLength(500);
+            builder.Property(x => x.Email).HasMaxLength(100);
 
-            builder.HasKey(x => x.ID);
+            builder.HasKey(x => x.Id);
         }
     }
 }

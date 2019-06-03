@@ -1,10 +1,9 @@
-﻿using Business.Interfaces;
+﻿using Business;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using System.Reactive.Linq;
-using Extensions;
+using System.Threading.Tasks;
 
 namespace Default.Architecture.Controllers
 {
@@ -12,9 +11,9 @@ namespace Default.Architecture.Controllers
     [Route("api/account")]
     public class AccountController : Controller
     {
-        private IUserServices userServices;
+        private UserServices userServices;
 
-        public AccountController(IUserServices userServices)
+        public AccountController(UserServices userServices)
         {
             this.userServices = userServices;
         }
@@ -23,9 +22,7 @@ namespace Default.Architecture.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
-            return await userServices.RegisterAsync(user)
-                .Select(registredUser => Ok(registredUser))
-                .ToActionResult();
+            return Ok(await userServices.RegisterAsync(user));
         }
     }
 }

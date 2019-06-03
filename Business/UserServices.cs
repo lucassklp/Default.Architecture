@@ -1,20 +1,19 @@
 ﻿using Business.Exceptions;
-using Business.Interfaces;
-using Repository.Interfaces;
-using Extensions;
+using Business.Validators;
 using Domain.Entities;
+using Extensions;
+using Repository;
 using System;
 using System.Reactive.Linq;
-using Business.Validators;
 
 namespace Business
 {
-    public class UserServices : IUserServices
+    public class UserServices
     {
-        IUserRepository userRepository;
+        UserRepository userRepository;
         private ValidatorService validator;
-        ICrud<long, User> crud;
-        public UserServices(IUserRepository userRepository, ValidatorService validator, ICrud<long, User> crud)
+        Crud<long, User> crud;
+        public UserServices(UserRepository userRepository, ValidatorService validator, Crud<long, User> crud)
         {
             this.userRepository = userRepository;
             this.validator = validator;
@@ -25,7 +24,7 @@ namespace Business
         {
             return this.validator.CheckAsync(new RegisterUserValidation(), user).SelectMany(validator =>
             {
-                return this.userRepository.IsRegistred(user).SelectMany(isRegistred =>
+                return this.userRepository.IsRegistredAsync(user).Select(isRegistred =>
                 {
                     if (!isRegistred)
                     {

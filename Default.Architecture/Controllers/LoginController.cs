@@ -1,12 +1,10 @@
-﻿using System.Reactive.Linq;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Default.Architecture.Authentication;
 using Domain;
 using Domain.Dtos;
-using Default.Architecture.Authentication;
-using Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Default.Architecture.Controllers
 {
@@ -23,25 +21,7 @@ namespace Default.Architecture.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] CredentialDto user)
         {
-            return await authenticator.Login(user).Select(token =>
-            {
-                return Json(new
-                {
-                    token
-                });
-            }).ToActionResult();
-        }
-        
-        [HttpGet]
-        public IActionResult GetUserInfo()
-        {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-
-            return Json(new 
-            {
-                UserName = claimsIdentity.Name,
-                claimsIdentity.Claims
-            });
+            return Json(await authenticator.Login(user).Select(token => new { token }));
         }
     }
 }

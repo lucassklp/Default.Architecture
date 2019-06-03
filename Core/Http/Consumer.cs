@@ -1,5 +1,4 @@
-﻿using Core.Http.Interfaces;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,12 +12,12 @@ namespace Core.Http
     public class Consumer
     {
         private HttpClient http;
-        
+
         public Consumer(HttpClient httpClient)
         {
             http = httpClient;
         }
-        
+
         public IObservable<TReturn> Post<TReturn, TEntity>(string path, TEntity body, IDictionary<string, string> headers = null)
         {
             return Observable.Create<TReturn>(async observer =>
@@ -52,7 +51,7 @@ namespace Core.Http
 
                 return Disposable.Empty;
             });
-           
+
         }
     }
 }

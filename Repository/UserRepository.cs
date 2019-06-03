@@ -1,45 +1,41 @@
-﻿using Persistence;
-using Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using Domain.Entities;
-using System;
-using System.Reactive.Linq;
+﻿using Core;
 using Domain;
-using System.Reactive.Disposables;
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Reactive.Linq;
 
 namespace Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : AbstractRepository
     {
-        private DaoContext context;
-
-        public UserRepository(DaoContext daoContext)
+        public UserRepository(DbContext daoContext) : base(daoContext)
         {
-            this.context = daoContext;
         }
 
-        public IObservable<bool> IsRegistred(User user)
+        public bool IsRegistred(User user)
         {
-            return Observable.Create<bool>(observer =>
-            {
-                observer.OnNext(this.context.Manipulate<User>().Any(x => x.Email == user.Email));
-                return Disposable.Empty;
-            });
+            return Set<User>().Any(x => x.Email == user.Email);
         }
 
-        public IObservable<User> Login(ICredential credential)
+        public IObservable<bool> IsRegistredAsync(User user)
         {
-            return Observable.Create<User>(observer =>
-            {
-                var user = context.Manipulate<User>()
-                    .Include(u => u.UserRoles)
-                        .ThenInclude(userRoles => userRoles.Role)
-                    .Single(x => x.Login == credential.Login && x.Password == credential.Password);
+            return SingleObservable.Create(() => IsRegistred(user));
+        }
 
-                observer.OnNext(user);
-                return Disposable.Empty;
-            });
+        public User Login(ICredential credential)
+        {
+            return Set<User>()
+                .Include(u => u.UserRoles)
+                    .ThenInclude(userRoles => userRoles.Role)
+                .Single(x => x.Login == credential.Login && x.Password == credential.Password);
+        }
+
+
+        public IObservable<User> LoginAsync(ICredential credential)
+        {
+            return SingleObservable.Create(() => Login(credential));
         }
     }
 }

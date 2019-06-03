@@ -1,30 +1,31 @@
-﻿using System;
-using System.Reactive.Linq;
-using Business.Interfaces;
-using Business.Validators;
+﻿using Business.Validators;
+using Core;
 using Domain;
 using Domain.Entities;
-using Repository.Interfaces;
+using Extensions;
+using Repository;
+using System;
 
 namespace Business
 {
-    public class LoginServices : ILoginServices
+    public class LoginServices
     {
-        private IUserRepository repository;
+        private UserRepository repository;
         private ValidatorService validator;
 
-        public LoginServices(IUserRepository repository, ValidatorService validator)
+        public LoginServices(UserRepository repository, ValidatorService validator)
         {
             this.repository = repository;
             this.validator = validator;
         }
 
-        public IObservable<User> Login(ICredential credential)
+        public User Login(ICredential credential)
         {
-            return validator.CheckAsync(new CredentialValidation(), credential)
-                .SelectMany(result => {
-                    return repository.Login(credential);
-                });
+            validator.Check(new CredentialValidation(), credential);
+            credential.Password = credential.Password.ToSHA512();
+            return repository.Login(credential);
         }
+
+        public IObservable<User> LoginAsync(ICredential credential) => SingleObservable.Create(() => Login(credential));
     }
 }

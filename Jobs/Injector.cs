@@ -2,7 +2,7 @@
 
 namespace Jobs
 {
-    public static class Container
+    public static class Injector
     {
         public static IServiceCollection AddJobs(this IServiceCollection services)
         {

@@ -1,8 +1,8 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Extensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
-using Extensions;
-using Microsoft.Extensions.Configuration;
 
 namespace Default.Architecture.Authentication.Jwt
 {
@@ -42,12 +42,12 @@ namespace Default.Architecture.Authentication.Jwt
         public static TimeSpan ClockSkew { get; set; } = TimeSpan.FromHours(0);
 
         public static string Issuer { get; set; } = "";
-        
+
         public static string Audience { get; set; } = "";
 
         public static bool ValidateIssuerSigningKey { get; set; } = true;
 
         public static bool ValidateLifetime { get; set; } = true;
-        
+
     }
 }

@@ -1,4 +1,7 @@
-﻿using Domain;
+﻿using Business;
+using Core;
+using Domain;
+using Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -6,23 +9,20 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Reactive.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using Domain.Entities;
-using Business.Interfaces;
-using System.Reactive.Disposables;
 
 namespace Default.Architecture.Authentication.Jwt
 {
     public class JwtAuthenticator : IAuthenticator<ICredential>
     {
-        private ILoginServices loginService;
-        public JwtAuthenticator(ILoginServices repository)
+        private LoginServices loginService;
+        public JwtAuthenticator(LoginServices repository)
         {
             loginService = repository;
         }
 
         public IObservable<string> Login(ICredential credential)
         {
-            return loginService.Login(credential).SelectMany(user =>
+            return loginService.LoginAsync(credential).SelectMany(user =>
             {
                 if (user != null)
                 {
@@ -34,7 +34,7 @@ namespace Default.Architecture.Authentication.Jwt
 
         private IObservable<string> GenerateToken(User user)
         {
-            return Observable.Create<string>(observer =>
+            return SingleObservable.Create(() =>
             {
                 var handler = new JwtSecurityTokenHandler();
 
@@ -46,7 +46,7 @@ namespace Default.Architecture.Authentication.Jwt
                     claims.Add(new Claim(ClaimTypes.Role, userRole.Role.Description));
                 }
 
-                ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(ClaimTypes.NameIdentifier, user.ID.ToString()), claims);
+                ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(ClaimTypes.NameIdentifier, user.Id.ToString()), claims);
 
                 var securityToken = handler.CreateToken(new SecurityTokenDescriptor
                 {
@@ -58,8 +58,7 @@ namespace Default.Architecture.Authentication.Jwt
                     NotBefore = DateTime.Now
                 });
 
-                observer.OnNext(handler.WriteToken(securityToken));
-                return Disposable.Empty;
+                return handler.WriteToken(securityToken);
             });
         }
     }

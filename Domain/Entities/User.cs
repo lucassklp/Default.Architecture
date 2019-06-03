@@ -4,7 +4,7 @@ namespace Domain.Entities
 {
     public class User : Identifiable<long>, ICredential
     {
-        public long ID { get; set; }
+        public long Id { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
 

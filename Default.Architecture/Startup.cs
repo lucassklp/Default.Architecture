@@ -1,18 +1,16 @@
 ﻿using Default.Architecture.Authentication.Jwt;
+using Default.Architecture.Middlewares;
+using Jobs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Persistence;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
-using Jobs;
-using Microsoft.AspNetCore.Mvc;
-using Default.Architecture.Middlewares;
 
 namespace Default.Architecture
 {
@@ -29,14 +27,8 @@ namespace Default.Architecture
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //Configure the ConnectionString (Set the 'ConnectionString' section in appsettings.json)
-            services.AddDbContext<DaoContext>(options => 
-            {
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
-            });
-
             //Injecting the services (See: Injector.cs)
-            services.InjectServices();
+            services.AddWebControllers();
 
             //Configuring CORS
             services.AddCors(config =>
@@ -91,7 +83,7 @@ namespace Default.Architecture
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseExceptionHandlingMiddleware();
-            
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
             app.UseSwaggerUi3();

@@ -66,7 +66,7 @@ namespace Business.Validators.CustomValidators
             {
                 sum += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
             }
-                
+
             rest = sum % 11;
             if (rest < 2)
             {
@@ -76,7 +76,7 @@ namespace Business.Validators.CustomValidators
             {
                 rest = 11 - rest;
             }
-                
+
             digit = digit + rest.ToString();
             return cpf.EndsWith(digit);
 
