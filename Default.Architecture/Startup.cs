@@ -1,5 +1,7 @@
-﻿using Default.Architecture.Authentication.Jwt;
+﻿using System.Reflection;
+using Default.Architecture.Authentication.Jwt;
 using Default.Architecture.Middlewares;
+using FluentValidation.AspNetCore;
 using Jobs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -38,7 +40,7 @@ namespace Default.Architecture
                 policy.Methods.Add("*");
                 policy.Origins.Add("*");
                 policy.SupportsCredentials = true;
-                config.AddPolicy("policy", policy);
+                config.AddPolicy("DevelopmentCorsPolicy", policy);
             });
 
             //Load the Jwt Configuration from the appsettings.json (See 'JwtConfiguration' section in appsettings.json)
@@ -56,6 +58,9 @@ namespace Default.Architecture
                              .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            
+            mvc.AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
             mvc.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -82,13 +87,18 @@ namespace Default.Architecture
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            
+            if (env.IsDevelopment())
+            {
+                app.UseCors("DevelopmentCorsPolicy");
+            }
+            
             app.UseExceptionHandlingMiddleware();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
             app.UseSwaggerUi3();
-
-            app.UseCors("policy");
+            
             app.UseAuthentication();
             app.UseMvc();
             app.UseJobs();

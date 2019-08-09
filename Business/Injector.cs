@@ -11,7 +11,6 @@ namespace Business
 
             services.AddTransient<LoginServices>();
             services.AddTransient<UserServices>();
-            services.AddTransient<ValidatorService>();
 
             return services;
         }

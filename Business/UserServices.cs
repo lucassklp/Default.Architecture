@@ -5,37 +5,33 @@ using Extensions;
 using Repository;
 using System;
 using System.Reactive.Linq;
+using Business.Validation.Validators;
 
 namespace Business
 {
     public class UserServices
     {
         UserRepository userRepository;
-        private ValidatorService validator;
         Crud<long, User> crud;
-        public UserServices(UserRepository userRepository, ValidatorService validator, Crud<long, User> crud)
+        public UserServices(UserRepository userRepository, Crud<long, User> crud)
         {
             this.userRepository = userRepository;
-            this.validator = validator;
             this.crud = crud;
         }
 
         public IObservable<User> RegisterAsync(User user)
         {
-            return this.validator.CheckAsync(new RegisterUserValidation(), user).SelectMany(validator =>
+            return userRepository.IsRegistredAsync(user).Select(isRegistred =>
             {
-                return this.userRepository.IsRegistredAsync(user).Select(isRegistred =>
+                if (!isRegistred)
                 {
-                    if (!isRegistred)
-                    {
-                        user.Password = user.Password.ToSHA512();
-                        return this.crud.Create(user);
-                    }
-                    else
-                    {
-                        throw new UserExistentException(user);
-                    }
-                });
+                    user.Password = user.Password.ToSHA512();
+                    return this.crud.Create(user);
+                }
+                else
+                {
+                    throw new UserExistentException(user);
+                }
             });
         }
     }
