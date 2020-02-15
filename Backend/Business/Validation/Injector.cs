@@ -1,5 +1,6 @@
 using Business.Validation.Validators;
 using Domain;
+using Domain.Dtos;
 using Domain.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -11,7 +12,7 @@ namespace Business.Validation
     {
         public static IServiceCollection AddValidators(this IServiceCollection services)
         {
-            services.AddTransient<IValidator<ICredential>, CredentialValidator>();
+            services.AddTransient<IValidator<CredentialDto>, CredentialValidator>();
             services.AddTransient<IValidator<User>, RegisterUserValidator>();
 
             services.AddTransient<IValidatorInterceptor, ValidationInterceptor>();

@@ -83,7 +83,6 @@ namespace Default.Architecture
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            
             if (env.IsDevelopment())
             {
                 app.UseCors("DevelopmentCorsPolicy");
@@ -94,9 +93,13 @@ namespace Default.Architecture
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseOpenApi();
             app.UseSwaggerUi3();
-            
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
+
             app.UseAuthentication();
-            app.UseMvc();
         }
     }
 }

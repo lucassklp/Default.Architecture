@@ -1,5 +1,6 @@
 ﻿using Core;
 using Domain;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,7 +30,7 @@ namespace Persistence.Repository
             return Set()
                 .Include(u => u.UserRoles)
                     .ThenInclude(userRoles => userRoles.Role)
-                .Single(x => x.Login == credential.Login && x.Password == credential.Password);
+                .Single(x => x.Name.Equals(credential.Login) && x.Password.Equals(credential.Password));
         }
 
 

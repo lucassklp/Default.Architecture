@@ -1,6 +1,7 @@
 ﻿using Business;
 using Core;
 using Domain;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -9,6 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Reactive.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace Default.Architecture.Authentication.Jwt
 {
@@ -20,46 +22,42 @@ namespace Default.Architecture.Authentication.Jwt
             loginService = repository;
         }
 
-        public IObservable<string> Login(ICredential credential)
+        public async Task<string> Login(ICredential credential)
         {
-            return loginService.LoginAsync(credential).SelectMany(user =>
+            var user = await loginService.LoginAsync(credential);
+
+            if (user != null)
             {
-                if (user != null)
-                {
-                    return this.GenerateToken(user);
-                }
-                else return null;
-            });
+                return await this.GenerateToken(user);
+            }
+            else return null;
         }
 
-        private IObservable<string> GenerateToken(User user)
+        private async Task<string> GenerateToken(User user)
         {
-            return SingleObservable.Create(() =>
+            var handler = new JwtSecurityTokenHandler();
+
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, user.Name));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            foreach (var userRole in user.UserRoles)
             {
-                var handler = new JwtSecurityTokenHandler();
+                claims.Add(new Claim(ClaimTypes.Role, userRole.Role.Description));
+            }
 
-                List<Claim> claims = new List<Claim>();
-                claims.Add(new Claim(ClaimTypes.Name, user.Name));
-                claims.Add(new Claim(ClaimTypes.Email, user.Email));
-                foreach (var userRole in user.UserRoles)
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, userRole.Role.Description));
-                }
+            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(ClaimTypes.NameIdentifier, user.Id.ToString()), claims);
 
-                ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(ClaimTypes.NameIdentifier, user.Id.ToString()), claims);
-
-                var securityToken = handler.CreateToken(new SecurityTokenDescriptor
-                {
-                    Issuer = JwtTokenDefinitions.Issuer,
-                    Audience = JwtTokenDefinitions.Audience,
-                    SigningCredentials = JwtTokenDefinitions.SigningCredentials,
-                    Subject = identity,
-                    Expires = DateTime.Now.Add(JwtTokenDefinitions.TokenExpirationTime),
-                    NotBefore = DateTime.Now
-                });
-
-                return handler.WriteToken(securityToken);
+            var securityToken = handler.CreateToken(new SecurityTokenDescriptor
+            {
+                Issuer = JwtTokenDefinitions.Issuer,
+                Audience = JwtTokenDefinitions.Audience,
+                SigningCredentials = JwtTokenDefinitions.SigningCredentials,
+                Subject = identity,
+                Expires = DateTime.Now.Add(JwtTokenDefinitions.TokenExpirationTime),
+                NotBefore = DateTime.Now
             });
+
+            return handler.WriteToken(securityToken);
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Domain;
+using Domain.Dtos;
 using FluentValidation;
 
 namespace Business.Validation.Validators
 {
-    class CredentialValidator : AbstractValidator<ICredential>
+    class CredentialValidator : AbstractValidator<CredentialDto>
     {
         public CredentialValidator()
         {

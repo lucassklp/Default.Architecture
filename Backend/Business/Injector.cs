@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Persistence.Repository;
+using Business.Validation;
 
 namespace Business
 {
@@ -8,7 +9,7 @@ namespace Business
         public static IServiceCollection AddBusiness(this IServiceCollection services)
         {
             services.AddRepository();
-
+            services.AddValidators();
             services.AddTransient<LoginServices>();
             services.AddTransient<UserServices>();
 

@@ -5,10 +5,8 @@ COPY . .
 RUN npm install -g @angular/cli@9.0.2
 RUN npm install
 RUN ng build --prod 
-RUN ls 
 
 FROM nginx:1.17.8 as publish
 COPY --from=build /src/dist/default-architecture /usr/share/nginx/html
-RUN cd /usr/share/nginx/html && ls
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

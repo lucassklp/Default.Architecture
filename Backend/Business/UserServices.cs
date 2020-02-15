@@ -30,7 +30,7 @@ namespace Business
                 }
                 else
                 {
-                    throw new UserExistentException(user);
+                    throw new ExistentUserException(user);
                 }
             });
         }

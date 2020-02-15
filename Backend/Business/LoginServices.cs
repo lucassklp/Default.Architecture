@@ -7,6 +7,9 @@ using Persistence.Repository;
 using System;
 using Business.Validation;
 using Business.Validation.Validators;
+using Domain.Dtos;
+using System.Threading.Tasks;
+using Business.Exceptions;
 
 namespace Business
 {
@@ -22,10 +25,16 @@ namespace Business
         public User Login(ICredential credential)
         {
             credential.Password = credential.Password.ToSHA512();
-            return repository.Login(credential);
+            try
+            {
+                return repository.Login(credential);
+            }
+            catch(InvalidOperationException ex)
+            {
+                throw new InvalidCredentialException(ex);
+            }
         }
 
-        public IObservable<User> LoginAsync(ICredential credential) => 
-            SingleObservable.Create(() => Login(credential));
+        public async Task<User> LoginAsync(ICredential credential) => Login(credential);
     }
 }

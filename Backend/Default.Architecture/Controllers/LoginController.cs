@@ -21,7 +21,12 @@ namespace Default.Architecture.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] CredentialDto user)
         {
-            return Json(await authenticator.Login(user).Select(token => new { token }));
+            string token = await this.authenticator.Login(user);
+            if(string.IsNullOrWhiteSpace(token))
+            {
+                return Unauthorized();
+            }
+            return Json(new { token });
         }
     }
 }

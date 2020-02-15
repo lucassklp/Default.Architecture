@@ -36,6 +36,7 @@ namespace Default.Architecture.Middlewares
                 await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(new
                 {
                     message = ex.Message,
+                    token = ex.Token
                 }));
             }
             catch (ValidationException ex) //Validation Exceptions
@@ -45,6 +46,7 @@ namespace Default.Architecture.Middlewares
                 httpContext.Response.ContentType = "application/json";
                 await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(new
                 {
+                    token = "validation-error",
                     message = ex.Errors.Select(error => new
                     {
                         property = error.PropertyName,

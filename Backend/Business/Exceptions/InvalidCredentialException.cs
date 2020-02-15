@@ -1,11 +1,12 @@
-﻿namespace Business.Exceptions
+﻿using System;
+
+namespace Business.Exceptions
 {
     public class InvalidCredentialException : BusinessException
     {
-        public InvalidCredentialException()
-            : base("The credentials are incorrect")
+        public InvalidCredentialException(Exception ex)
+            : base("The credentials are incorrect", "incorrect-credentials", ex)
         {
-
         }
     }
 }
