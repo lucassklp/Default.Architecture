@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Persistence.Extensions;
+using System;
 using System.Reflection;
 
 namespace Persistence
@@ -19,7 +20,13 @@ namespace Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"), options => 
+            {
+                options.EnableRetryOnFailure(
+                    maxRetryCount: 3,
+                    maxRetryDelay: TimeSpan.FromSeconds(10),
+                    errorNumbersToAdd: null);
+            });
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             base.OnConfiguring(optionsBuilder);
         }
