@@ -8,7 +8,7 @@ In order to run the application, you must run following commands:
 
 ``git clone https://github.com/lucassklp/Default.Architecture.git``
 
-``cd Default.Achitecture``
+``cd Default.Architecture``
 
 ``docker-compose build --no-cache``
 
