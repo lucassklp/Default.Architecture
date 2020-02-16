@@ -6,7 +6,7 @@ A open-source web api starter project with authentication/authorization made wit
 
 In order to run the application, you must run following commands:
 
-$ ``git clone https://github.com/lucassklp/Default.Architecture.git``
+``git clone https://github.com/lucassklp/Default.Architecture.git``
 
 ``cd Default.Achitecture``
 
