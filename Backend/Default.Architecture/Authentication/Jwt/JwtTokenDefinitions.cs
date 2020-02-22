@@ -1,4 +1,4 @@
-﻿using Core.Extensions;
+﻿using Default.Architecture.Core.Extensions;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Text;
@@ -24,7 +24,7 @@ namespace Default.Architecture.Authentication.Jwt
         public static string Key
         {
             get => _key;
-            set => _key = value.ToMD5();
+            set => _key = value.ToMd5();
         }
 
         public static SecurityKey IssuerSigningKey

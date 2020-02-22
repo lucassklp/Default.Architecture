@@ -1,4 +1,4 @@
-﻿using Business;
+﻿using Default.Architecture.Business;
 using Default.Architecture.Authentication;
 using Default.Architecture.Authentication.Jwt;
 using Domain;

@@ -35,12 +35,12 @@ namespace Default.Architecture
             //Configuring CORS
             services.AddCors(config =>
             {
-                var policy = new CorsPolicy();
-                policy.Headers.Add("*");
-                policy.Methods.Add("*");
-                policy.Origins.Add("*");
-                policy.SupportsCredentials = true;
-                config.AddPolicy("DevelopmentCorsPolicy", policy);
+                config.AddPolicy("DevelopmentCorsPolicy", builder => 
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
             });
 
             //Load the Jwt Configuration from the appsettings.json (See 'JwtConfiguration' section in appsettings.json)

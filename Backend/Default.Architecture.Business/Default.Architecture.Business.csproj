@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
+    <PackageReference Include="System.Reactive.Core" Version="4.3.2" />
+    <PackageReference Include="System.Reactive.Interfaces" Version="4.3.2" />
+    <PackageReference Include="System.Reactive.Linq" Version="4.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Default.Architecture.Core\Default.Architecture.Core.csproj" />
+    <ProjectReference Include="..\Default.Architecture.Domain\Default.Architecture.Domain.csproj" />
+    <ProjectReference Include="..\Default.Architecture.Persistence\Default.Architecture.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

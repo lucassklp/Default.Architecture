@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+// regular style toast 
+@import '~bootstrap/scss/bootstrap';
+@import '~ngx-toastr/toastr';
+
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: .75rem;
+  }
+  
+  body {
+    background: #007bff;
+    background: linear-gradient(to right, #0062E6, #33AEFF);
+  }

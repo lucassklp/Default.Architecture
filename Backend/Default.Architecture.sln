@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture", "Default.Architecture\Default.Architecture.csproj", "{9331202D-0366-4B4A-B098-A4FC2AE25E29}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{F58B9429-4E97-4D90-B294-41BB1FE6857E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Persistence", "Default.Architecture.Persistence\Default.Architecture.Persistence.csproj", "{F58B9429-4E97-4D90-B294-41BB1FE6857E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{AEB51EE9-82BB-4948-A344-0864CFA83510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Domain", "Default.Architecture.Domain\Default.Architecture.Domain.csproj", "{AEB51EE9-82BB-4948-A344-0864CFA83510}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{E4C7BCC2-102C-438E-89AA-FEB711A1025D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Business", "Default.Architecture.Business\Default.Architecture.Business.csproj", "{E4C7BCC2-102C-438E-89AA-FEB711A1025D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{FC922D61-85D0-4AC7-9B2D-8D8692BF215B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Default.Architecture.Core", "Default.Architecture.Core\Default.Architecture.Core.csproj", "{FC922D61-85D0-4AC7-9B2D-8D8692BF215B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
