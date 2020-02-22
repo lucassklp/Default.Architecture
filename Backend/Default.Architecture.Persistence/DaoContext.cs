@@ -20,13 +20,7 @@ namespace Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"), options => 
-            {
-                options.EnableRetryOnFailure(
-                    maxRetryCount: 3,
-                    maxRetryDelay: TimeSpan.FromSeconds(10),
-                    errorNumbersToAdd: null);
-            });
+            optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             base.OnConfiguring(optionsBuilder);
         }
