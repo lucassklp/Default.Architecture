@@ -1,4 +1,5 @@
 ﻿using Default.Architecture.Business;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace Default.Architecture.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto user)
         {
             return Ok(await userServices.RegisterAsync(user));
         }

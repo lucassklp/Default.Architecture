@@ -6,14 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
     <PackageReference Include="System.Reactive.Core" Version="4.4.1" />
     <PackageReference Include="System.Reactive.Interfaces" Version="4.4.1" />
     <PackageReference Include="System.Reactive.Linq" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Default.Architecture.Core\Default.Architecture.Core.csproj" />
     <ProjectReference Include="..\Default.Architecture.Domain\Default.Architecture.Domain.csproj" />
     <ProjectReference Include="..\Default.Architecture.Persistence\Default.Architecture.Persistence.csproj" />
   </ItemGroup>

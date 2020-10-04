@@ -1,36 +1,39 @@
 ﻿using Domain.Entities;
 using Default.Architecture.Core.Extensions;
 using Persistence.Repository;
-using System;
-using System.Reactive.Linq;
 using Default.Architecture.Business.Exceptions;
+using Domain.Dtos;
+using System.Threading.Tasks;
 
 namespace Default.Architecture.Business
 {
     public class UserServices
     {
-        UserRepository userRepository;
-        Crud<long, User> crud;
-        public UserServices(UserRepository userRepository, Crud<long, User> crud)
+        private UserRepository userRepository;
+        public UserServices(UserRepository userRepository)
         {
             this.userRepository = userRepository;
-            this.crud = crud;
         }
 
-        public IObservable<User> RegisterAsync(User user)
+        public async Task<User> RegisterAsync(RegisterUserDto userDto)
         {
-            return userRepository.IsRegistredAsync(user).Select(isRegistred =>
+            var isRegistred = await userRepository.IsRegistredAsync(userDto);
+
+            if(!isRegistred)
             {
-                if (!isRegistred)
+                var user = new User
                 {
-                    user.Password = user.Password.ToSha512();
-                    return this.crud.Create(user);
-                }
-                else
-                {
-                    throw new ExistentUserException(user);
-                }
-            });
+                    Email = userDto.Email,
+                    Name = userDto.Name,
+                    Password = userDto.Password.ToSha512()
+                };
+
+                var createdUser = await userRepository.CreateAsync(user);
+                return createdUser;
+            }
+
+            throw new ExistentUserException(userDto);
+
         }
     }
 }

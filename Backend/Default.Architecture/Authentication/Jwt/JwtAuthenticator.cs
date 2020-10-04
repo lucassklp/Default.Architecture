@@ -1,15 +1,11 @@
 ﻿using Default.Architecture.Business;
-using Default.Architecture.Core;
 using Domain;
-using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Reactive.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Default.Architecture.Authentication.Jwt
@@ -28,12 +24,12 @@ namespace Default.Architecture.Authentication.Jwt
 
             if (user != null)
             {
-                return await this.GenerateToken(user);
+                return GenerateToken(user);
             }
             else return null;
         }
 
-        private async Task<string> GenerateToken(User user)
+        private string GenerateToken(User user)
         {
             var handler = new JwtSecurityTokenHandler();
 

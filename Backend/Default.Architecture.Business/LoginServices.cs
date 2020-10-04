@@ -22,19 +22,17 @@ namespace Default.Architecture.Business
             this.repository = repository;
         }
 
-        public User Login(ICredential credential)
+        public async Task<User> LoginAsync(ICredential credential)
         {
             credential.Password = credential.Password.ToSha512();
             try
             {
-                return repository.Login(credential);
+                return await repository.LoginAsync(credential);
             }
             catch(InvalidOperationException ex)
             {
                 throw new InvalidCredentialException(ex);
             }
         }
-
-        public async Task<User> LoginAsync(ICredential credential) => Login(credential);
     }
 }

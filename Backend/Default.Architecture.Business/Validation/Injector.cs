@@ -13,7 +13,7 @@ namespace Default.Architecture.Business.Validation
         public static IServiceCollection AddValidators(this IServiceCollection services)
         {
             services.AddTransient<IValidator<CredentialDto>, CredentialValidator>();
-            services.AddTransient<IValidator<User>, RegisterUserValidator>();
+            services.AddTransient<IValidator<RegisterUserDto>, RegisterUserValidator>();
 
             services.AddTransient<IValidatorInterceptor, ValidationInterceptor>();
 

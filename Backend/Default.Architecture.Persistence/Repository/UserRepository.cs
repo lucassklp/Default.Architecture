@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Persistence.Repository
 {
@@ -15,28 +16,17 @@ namespace Persistence.Repository
         {
         }
 
-        public bool IsRegistred(User user)
+        public async Task<bool> IsRegistredAsync(RegisterUserDto user)
         {
-            return Set().Any(x => x.Email == user.Email);
+            return await Set().AnyAsync(x => x.Email == user.Email);
         }
 
-        public IObservable<bool> IsRegistredAsync(User user)
-        {
-            return SingleObservable.Create(() => IsRegistred(user));
-        }
-
-        public User Login(ICredential credential)
+        public Task<User> LoginAsync(ICredential credential)
         {
             return Set()
                 .Include(u => u.UserRoles)
                     .ThenInclude(userRoles => userRoles.Role)
-                .Single(x => x.Email.Equals(credential.Login) && x.Password.Equals(credential.Password));
-        }
-
-
-        public IObservable<User> LoginAsync(ICredential credential)
-        {
-            return SingleObservable.Create(() => Login(credential));
+                .SingleOrDefaultAsync(x => x.Email.Equals(credential.Login) && x.Password.Equals(credential.Password));
         }
     }
 }
