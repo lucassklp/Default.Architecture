@@ -15,7 +15,7 @@ namespace Persistence.Extensions
                 // Replace column names            
                 foreach (var property in entity.GetProperties())
                 {
-                    property.SetColumnName(property.GetColumnName().ToSnakeCase());
+                    property.SetColumnName(property.GetColumnBaseName().ToSnakeCase());
                 }
 
                 foreach (var key in entity.GetKeys())
@@ -30,7 +30,7 @@ namespace Persistence.Extensions
 
                 foreach (var index in entity.GetIndexes())
                 {
-                    index.SetName(index.GetName().ToSnakeCase());
+                    index.SetDatabaseName(index.GetDatabaseName().ToSnakeCase());
                 }
             }
         }

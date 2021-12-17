@@ -1,11 +1,11 @@
 ﻿using Domain.Entities;
 using Default.Architecture.Core.Extensions;
 using Persistence.Repository;
-using Default.Architecture.Business.Exceptions;
+using Default.Architecture.Services.Exceptions;
 using Domain.Dtos;
 using System.Threading.Tasks;
 
-namespace Default.Architecture.Business
+namespace Default.Architecture.Services
 {
     public class UserServices
     {

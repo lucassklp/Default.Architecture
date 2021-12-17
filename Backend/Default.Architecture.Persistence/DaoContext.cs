@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Persistence.Extensions;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Reflection;
 
@@ -20,7 +21,8 @@ namespace Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+            optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"), serverVersion);
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             base.OnConfiguring(optionsBuilder);
         }

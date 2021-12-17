@@ -7,7 +7,7 @@ namespace Default.Architecture.Authentication.Jwt
 {
     public static class JwtConfigure
     {
-        public static void ConfigureJwtAuthorization(this IServiceCollection services)
+        public static void SetJwtAuthorization(this IServiceCollection services)
         {
             services.AddAuthorization(auth =>
             {
@@ -17,7 +17,7 @@ namespace Default.Architecture.Authentication.Jwt
             });
         }
 
-        public static void ConfigureJwtAuthentication(this IServiceCollection services)
+        public static void SetJwtAuthentication(this IServiceCollection services)
         {
             services.AddAuthentication(options =>
             {

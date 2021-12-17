@@ -1,4 +1,4 @@
-﻿using Default.Architecture.Business;
+﻿using Default.Architecture.Services;
 using Domain;
 using Domain.Entities;
 using Microsoft.IdentityModel.Tokens;

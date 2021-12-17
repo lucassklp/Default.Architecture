@@ -1,4 +1,4 @@
-﻿using Default.Architecture.Business;
+﻿using Default.Architecture.Services;
 using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;

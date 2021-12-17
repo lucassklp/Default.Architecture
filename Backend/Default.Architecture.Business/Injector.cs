@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Persistence.Repository;
-using Default.Architecture.Business.Validation;
+using Default.Architecture.Services.Validation;
 
-namespace Default.Architecture.Business
+namespace Default.Architecture.Services
 {
     public static class Injector
     {

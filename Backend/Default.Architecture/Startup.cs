@@ -46,9 +46,9 @@ namespace Default.Architecture
             //Load the Jwt Configuration from the appsettings.json (See 'JwtConfiguration' section in appsettings.json)
             JwtTokenDefinitions.LoadFromConfiguration(Configuration);
             //Configuring Authentication
-            services.ConfigureJwtAuthentication();
+            services.SetJwtAuthentication();
             //Configuring Authorization
-            services.ConfigureJwtAuthorization();
+            services.SetJwtAuthorization();
 
             //All pages needs to be authenticated by default
             var mvc = services.AddMvc(config =>
@@ -61,8 +61,6 @@ namespace Default.Architecture
 
             
             mvc.AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
-
-            mvc.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             mvc.AddNewtonsoftJson(config =>
             {
