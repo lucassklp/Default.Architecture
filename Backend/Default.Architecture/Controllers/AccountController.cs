@@ -1,9 +1,7 @@
 ﻿using Default.Architecture.Services;
 using Domain.Dtos;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace Default.Architecture.Controllers

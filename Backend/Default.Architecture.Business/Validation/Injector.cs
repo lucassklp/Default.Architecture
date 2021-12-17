@@ -1,7 +1,5 @@
 using Default.Architecture.Services.Validation.Validators;
-using Domain;
 using Domain.Dtos;
-using Domain.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;

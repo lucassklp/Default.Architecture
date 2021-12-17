@@ -1,5 +1,4 @@
 ﻿using Domain.Dtos;
-using Domain.Entities;
 using FluentValidation;
 
 namespace Default.Architecture.Services.Validation.Validators

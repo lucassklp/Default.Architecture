@@ -1,5 +1,4 @@
 ﻿using Domain.Dtos;
-using Domain.Entities;
 
 namespace Default.Architecture.Services.Exceptions
 {

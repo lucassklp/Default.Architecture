@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Persistence.Extensions;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Reflection;
 

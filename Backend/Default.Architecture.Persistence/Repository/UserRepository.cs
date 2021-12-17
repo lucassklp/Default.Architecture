@@ -1,10 +1,7 @@
-﻿using Default.Architecture.CrossCutting;
-using Domain;
+﻿using Domain;
 using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
