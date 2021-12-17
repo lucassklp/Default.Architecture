@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
@@ -7,7 +8,7 @@ namespace Default.Architecture.Authentication.Jwt
 {
     public static class JwtConfigure
     {
-        public static void SetJwtAuthorization(this IServiceCollection services)
+        public static void EnableJwtAuthorization(this IServiceCollection services)
         {
             services.AddAuthorization(auth =>
             {
@@ -17,8 +18,9 @@ namespace Default.Architecture.Authentication.Jwt
             });
         }
 
-        public static void SetJwtAuthentication(this IServiceCollection services)
+        public static void EnableJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            JwtTokenDefinitions.LoadFromConfiguration(configuration);
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;

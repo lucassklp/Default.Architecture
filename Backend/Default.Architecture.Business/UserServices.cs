@@ -1,5 +1,5 @@
 ﻿using Domain.Entities;
-using Default.Architecture.Core.Extensions;
+using Default.Architecture.CrossCutting.Extensions;
 using Persistence.Repository;
 using Default.Architecture.Services.Exceptions;
 using Domain.Dtos;

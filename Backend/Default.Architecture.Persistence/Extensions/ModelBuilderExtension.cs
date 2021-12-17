@@ -1,4 +1,4 @@
-﻿using Default.Architecture.Core.Extensions;
+﻿using Default.Architecture.CrossCutting.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Extensions

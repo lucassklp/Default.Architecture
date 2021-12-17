@@ -6,7 +6,7 @@ namespace Default.Architecture.Services
 {
     public static class Injector
     {
-        public static IServiceCollection AddBusiness(this IServiceCollection services)
+        public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddRepository();
             services.AddValidators();

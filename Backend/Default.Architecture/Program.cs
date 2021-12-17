@@ -1,48 +1,71 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Default.Architecture;
+using Default.Architecture.Authentication.Jwt;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+using System.Reflection;
 
-namespace Default.Architecture
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+builder.Services.AddApplication();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddCors(config =>
 {
-    public class Program
+    config.AddPolicy("DevelopmentCorsPolicy", builder =>
     {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseKestrel((env, config) => 
-                {
-                    var server = env.Configuration.GetSection("Server");
+builder.Services.EnableJwtAuthentication(builder.Configuration);
+builder.Services.EnableJwtAuthorization();
 
-                    //Configura o HTTP
-                    var http = server.GetSection("Http");
-                    var httpPort = Convert.ToInt32(http.GetSection("Port").Value);
-                    var httpIp = http.GetSection("ListenIp").Value;
-                    config.Listen(IPAddress.Parse(httpIp), httpPort);
+//All endpoints requires an authenticated user
+var mvc = builder.Services.AddMvc(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+                 .RequireAuthenticatedUser()
+                 .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
 
-                    //Configura o HTTPS
-                    var https = server.GetSection("Https");
+mvc.AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
-                    if (http.GetValue<bool>("Enabled"))
-                    {
-                        var httpsPort = Convert.ToInt32(https.GetSection("Port").Value);
-                        var httpsIp = https.GetSection("ListenIp").Value;
-                        var certificate = https.GetSection("Certificate").Value;
-                        config.Listen(IPAddress.Parse(httpsIp), httpsPort, opt =>
-                        {
-                            var directory = $@"{Directory.GetCurrentDirectory()}\{certificate}";
-                            var passwd = https.GetValue<string>("Password");
-                            opt.UseHttps(directory, passwd);
-                        });
-                    }
-                })
-                .UseStartup<Startup>()
-                .Build();
-    }
+mvc.AddNewtonsoftJson(config =>
+{
+    //All JSON returns lowerCamelCase (JSON Standard - By Google) instead of PascalCase (C# Standard - By Microsoft)
+    //References: 
+    //JSON Standards by Google https://google.github.io/styleguide/jsoncstyleguide.xml?showone=Property_Name_Format#Property_Name_Format
+    //C# Standards by Microsoft https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions
+    config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+    //Trick for handling/ignoring Reference Loop Handling
+    config.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
+
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.UseCors("DevelopmentCorsPolicy");
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+app.UseAuthentication();
+app.Run();

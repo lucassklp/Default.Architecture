@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Default.Architecture.Core.Extensions
+namespace Default.Architecture.CrossCutting.Extensions
 {
     public static class Hashing
     {

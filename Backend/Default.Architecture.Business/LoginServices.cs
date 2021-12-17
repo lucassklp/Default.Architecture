@@ -1,8 +1,8 @@
 ﻿using Default.Architecture.Services.Validators;
-using Default.Architecture.Core;
+using Default.Architecture.CrossCutting;
 using Domain;
 using Domain.Entities;
-using Default.Architecture.Core.Extensions;
+using Default.Architecture.CrossCutting.Extensions;
 using Persistence.Repository;
 using System;
 using Default.Architecture.Services.Validation;

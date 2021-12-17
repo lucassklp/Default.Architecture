@@ -1,4 +1,4 @@
-﻿using Default.Architecture.Core;
+﻿using Default.Architecture.CrossCutting;
 using Domain;
 using Domain.Dtos;
 using Domain.Entities;
