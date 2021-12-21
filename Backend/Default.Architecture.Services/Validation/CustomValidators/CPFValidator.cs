@@ -1,17 +1,16 @@
-﻿using FluentValidation.Resources;
+﻿using FluentValidation;
 using FluentValidation.Validators;
 
-namespace Default.Architecture.Business.Validators.CustomValidators
+namespace Default.Architecture.Services.Validators.CustomValidators
 {
-    public class CPFValidator : PropertyValidator
+    public class CPFValidator<T, TProperty> : PropertyValidator<T, TProperty>
     {
-        public CPFValidator() : base(new LanguageStringSource(nameof(CPFValidator)))
-        {
-        }
 
-        protected override bool IsValid(PropertyValidatorContext context)
+        public override string Name => "CPF Validator";
+
+        public override bool IsValid(ValidationContext<T> context, TProperty value)
         {
-            var cpf = context.PropertyValue as string;
+            var cpf = value as string;
             string tempCpf, digit;
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -79,7 +78,6 @@ namespace Default.Architecture.Business.Validators.CustomValidators
 
             digit = digit + rest.ToString();
             return cpf.EndsWith(digit);
-
         }
     }
 }

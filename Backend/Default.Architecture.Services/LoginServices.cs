@@ -1,17 +1,12 @@
-﻿using Default.Architecture.Business.Validators;
-using Default.Architecture.Core;
-using Domain;
+﻿using Domain;
 using Domain.Entities;
-using Default.Architecture.Core.Extensions;
+using Default.Architecture.CrossCutting.Extensions;
 using Persistence.Repository;
 using System;
-using Default.Architecture.Business.Validation;
-using Default.Architecture.Business.Validation.Validators;
-using Domain.Dtos;
 using System.Threading.Tasks;
-using Default.Architecture.Business.Exceptions;
+using Default.Architecture.Services.Exceptions;
 
-namespace Default.Architecture.Business
+namespace Default.Architecture.Services
 {
     public class LoginServices
     {

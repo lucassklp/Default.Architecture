@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Default.Architecture.Business.Exceptions
+namespace Default.Architecture.Services.Exceptions
 {
     public class InvalidCredentialException : BusinessException
     {

@@ -1,4 +1,4 @@
-﻿using Default.Architecture.Business;
+﻿using Default.Architecture.Services;
 using Default.Architecture.Authentication;
 using Default.Architecture.Authentication.Jwt;
 using Domain;
@@ -9,9 +9,9 @@ namespace Default.Architecture
 {
     public static class Injector
     {
-        public static void AddWebControllers(this IServiceCollection services)
+        public static void AddApplication(this IServiceCollection services)
         {
-            services.AddBusiness();
+            services.AddServices();
 
             services.AddScoped<IAuthenticator<ICredential>, JwtAuthenticator>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

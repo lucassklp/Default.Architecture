@@ -1,8 +1,7 @@
 ﻿using Domain.Dtos;
-using Domain.Entities;
 using FluentValidation;
 
-namespace Default.Architecture.Business.Validation.Validators
+namespace Default.Architecture.Services.Validation.Validators
 {
     public class RegisterUserValidator : AbstractValidator<RegisterUserDto>
     {

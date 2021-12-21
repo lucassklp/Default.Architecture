@@ -1,12 +1,10 @@
-using Default.Architecture.Business.Validation.Validators;
-using Domain;
+using Default.Architecture.Services.Validation.Validators;
 using Domain.Dtos;
-using Domain.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Default.Architecture.Business.Validation
+namespace Default.Architecture.Services.Validation
 {
     public static class Injector
     {

@@ -1,4 +1,4 @@
-﻿using Default.Architecture.Business.Exceptions;
+﻿using Default.Architecture.Services.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

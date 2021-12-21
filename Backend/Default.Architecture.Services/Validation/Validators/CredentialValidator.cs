@@ -1,8 +1,7 @@
-﻿using Domain;
-using Domain.Dtos;
+﻿using Domain.Dtos;
 using FluentValidation;
 
-namespace Default.Architecture.Business.Validation.Validators
+namespace Default.Architecture.Services.Validation.Validators
 {
     class CredentialValidator : AbstractValidator<CredentialDto>
     {

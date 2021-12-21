@@ -1,7 +1,6 @@
 ﻿using Domain.Dtos;
-using Domain.Entities;
 
-namespace Default.Architecture.Business.Exceptions
+namespace Default.Architecture.Services.Exceptions
 {
     public class ExistentUserException : BusinessException
     {
