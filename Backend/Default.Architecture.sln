@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Persis
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Domain", "Default.Architecture.Domain\Default.Architecture.Domain.csproj", "{AEB51EE9-82BB-4948-A344-0864CFA83510}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Services", "Default.Architecture.Business\Default.Architecture.Services.csproj", "{E4C7BCC2-102C-438E-89AA-FEB711A1025D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Services", "Default.Architecture.Services\Default.Architecture.Services.csproj", "{E4C7BCC2-102C-438E-89AA-FEB711A1025D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.Core", "Default.Architecture.Core\Default.Architecture.Core.csproj", "{FC922D61-85D0-4AC7-9B2D-8D8692BF215B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Default.Architecture.CrossCutting", "Default.Architecture.CrossCutting\Default.Architecture.CrossCutting.csproj", "{FC922D61-85D0-4AC7-9B2D-8D8692BF215B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

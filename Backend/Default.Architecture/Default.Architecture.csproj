@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Default.Architecture.Business\Default.Architecture.Services.csproj" />
+    <ProjectReference Include="..\Default.Architecture.Services\Default.Architecture.Services.csproj" />
     <ProjectReference Include="..\Default.Architecture.Domain\Default.Architecture.Domain.csproj" />
   </ItemGroup>
 

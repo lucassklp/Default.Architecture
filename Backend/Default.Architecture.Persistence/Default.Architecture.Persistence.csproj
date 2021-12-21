@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Default.Architecture.Domain\Default.Architecture.Domain.csproj" />
-    <ProjectReference Include="..\Default.Architecture.Core\Default.Architecture.Core.csproj" />
+    <ProjectReference Include="..\Default.Architecture.CrossCutting\Default.Architecture.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>
